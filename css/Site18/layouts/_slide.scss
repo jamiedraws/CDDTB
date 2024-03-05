@@ -1,0 +1,200 @@
+@use "sass:math";
+
+$select: ".slide" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// layouts
+@use "../../../Shared/css/template/shoppingcart/layouts/slide" with (
+    $select: $select,
+    $desktop: queries.set(1100)
+);
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+@mixin base {
+    @include slide.new;
+
+    #{$select} {
+        &__nav {
+            height: 4em;
+
+            button {
+                font-size: 2.5em;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin hero {
+    #{$select} {
+        &--hero {
+            #{$select} {
+                &__into {
+                    margin: 0;
+
+                    align-items: stretch;
+                }
+
+                &__item {
+                    display: block;
+                }
+
+                &__thumbnails {
+                    position: relative;
+                    z-index: 2;
+                    text-align: right;
+
+                    display: block;
+                    margin: 0.5em;
+                }
+
+                &__thumbnail {
+                    border: 1px solid #bfb7c4;
+                    padding: 2em 0.5em 0.5em;
+                    margin: 0;
+                    font-size: 1.125em;
+                    text-decoration: none;
+                    line-height: 1;
+                    transition: 0.3s ease-in-out;
+
+                    &::before,
+                    &::after {
+                        display: none;
+                    }
+
+                    &:hover,
+                    &:focus,
+                    &--is-selected {
+                        background: #fff;
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin result {
+    #{$select} {
+        &--result {
+            #{$select} {
+                &__into {
+                    @media all and (min-width: slide.$desktop) {
+                        max-width: 90%;
+                        margin: auto;
+                    }
+                }
+
+                &__item {
+                    max-width: 100%;
+                    padding: 1em;
+
+                    @media all and (min-width: queries.set(800)) {
+                        max-width: 50%;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin review {
+    #{$select} {
+        &--review {
+            #{$select} {
+                &__into {
+                    max-width: 24em;
+                    margin: auto;
+                }
+
+                &__thumbnails {
+                    margin: 1em;
+                }
+
+                &__thumbnail {
+                    border-color: currentColor;
+
+                    &::before {
+                        background: none;
+                    }
+
+                    &--is-selected {
+                        &::after {
+                            background: currentColor;
+                        }
+                    }
+                }
+
+                &__dot {
+                    font-size: 2em;
+                    margin: 0.25em;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin instagram {
+    #{contain.$select} {
+        &--instagram-picture {
+            @include contain.ratio(math.div(1, 1));
+        }
+    }
+
+    #{$select} {
+        &--instagram {
+            @media all and (min-width: queries.set(960)) {
+                font-size: 1vw;
+            }
+
+            #{$select} {
+                &__into {
+                }
+
+                &__item {
+                    &:nth-child(even) {
+                        background: colors.get(shade);
+                    }
+
+                    &:nth-child(odd) {
+                        background: colors.get(shade-light);
+                    }
+
+                    max-width: 100%;
+
+                    @media all and (min-width: queries.set(320)) {
+                        max-width: calc(100% / 2);
+                    }
+
+                    @media all and (min-width: queries.set(640)) {
+                        max-width: calc(100% / 3);
+                    }
+
+                    @media all and (min-width: queries.set(960)) {
+                        max-width: queries.em(320);
+                        max-height: queries.em(320);
+                    }
+
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}

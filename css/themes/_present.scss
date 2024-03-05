@@ -1,0 +1,111 @@
+@use "../models/colors";
+@use "../models/queries";
+
+$select: ".theme" !default;
+
+@mixin ui {
+	#{$select} {
+		position: relative;
+		overflow: hidden;
+
+		&__img {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			z-index: -1;
+
+			img {
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
+
+@mixin colors {
+	#{$select} {
+		&--contrast {
+			color: white;
+			background: colors.get(third);
+
+			> picture {
+				background: colors.get(third);
+			}
+
+			::selection {
+				background: colors.get(second);
+				color: white;
+			}
+		}
+
+		&--dark {
+			background-color: colors.get(first);
+			background-image: url(/images/bkg.jpg);
+			background-repeat: repeat;
+			color: white;
+			&::after {
+				position: absolute;
+				right: 10em;
+				top: 0;
+				width: 50%;
+				height: 100%;
+				background: linear-gradient(125deg, transparent 0%, transparent 30%, rgba(223,200,98,1) 31%, transparent 34%, transparent 40%, rgba(223,200,98,1) 41%, transparent 44%, transparent 50%, rgba(223,200,98,1) 51%, transparent 54%, transparent 60%, rgba(223,200,98,1) 61%, transparent 64%);
+				content: "";
+				opacity: 0.10;
+				@media all and (max-width: queries.get(mobile)) {
+					display: none;
+				}
+			}
+		}
+
+		&--light {
+			background: colors.get(fourth);
+		}
+
+		&--fade {
+			color: white;
+			background: linear-gradient(#333333, #323232, #010101);
+		}
+
+		$slant: 130px;
+		&--slant {
+			background: #dddedf;
+			padding: 0;
+			&::before,
+			&::after {
+				content: "";
+				position: absolute;
+				z-index: -1;
+			}
+			&::before {
+				bottom: 0;
+				left: 0;
+	      border-bottom: $slant solid white;
+	      border-right: 100vw solid transparent;
+			}
+			&::after {
+				top: 0;
+				right: 0;
+	      border-top: $slant solid white;
+	      border-left: 100vw solid transparent;
+			}
+
+			@media all and (max-width: queries.get(mobile)) {
+				&::before {
+					border-bottom-width: 30px;
+				}
+				&::after {
+					border-top-width: 30px;
+				}
+			}
+
+		}
+
+
+		@content;
+	}
+}

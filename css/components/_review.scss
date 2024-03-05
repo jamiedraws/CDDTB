@@ -1,0 +1,83 @@
+@use "sass:math";
+@use "../../shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/utils/arp";
+
+@use "../components/card";
+
+@use "../models/fonts";
+@use "../models/colors";
+@use "../models/queries";
+
+$select: ".review" !default;
+
+@mixin ui {
+    @include card.review;
+    #{$select} {
+        $gap: 2rem;
+        text-align: center;
+
+        @include arp.apply("#{$select}__stars", math.div(250, 40), 250px) {
+            margin: 0 auto;
+        }
+
+        &__slide {
+            margin: auto;
+            position: relative;
+        }
+
+        &__in {
+            position: relative;
+        }
+
+        &__into {
+            margin: 0 -#{$gap};
+
+            @media all and (max-width: queries.get(small)) {
+                display: block;
+            }
+        }
+
+        .slide__nav {
+            justify-content: space-around;
+        }
+
+        @media all and (min-width: queries.get(nav)) {
+            .slide__nav {
+                position: absolute;
+                justify-content: space-between;
+            }
+        }
+
+        &__group {
+            margin: 0;
+
+            @media all and (min-width: queries.get(small)) {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: stretch;
+                flex: 1;
+            }
+        }
+
+        @media all and (max-width: queries.get(small)) {
+            &__item {
+                display: block;
+            }
+        }
+
+        &__quote {
+            @media all and (max-width: queries.get(small)) {
+                margin: #{$gap} 0;
+            }
+        }
+
+        @media all and (max-width: queries.get(small)) {
+            & &__nav,
+            & &__thumbnails {
+                display: none;
+            }
+        }
+
+        @content;
+    }
+}

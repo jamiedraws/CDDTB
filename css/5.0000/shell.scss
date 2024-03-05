@@ -1,0 +1,9 @@
+@use "../layouts/header";
+@use "../layouts/footer";
+
+@include header.ui;
+// adding new header for v2 as a modifier class (.header--alt)
+@include header.alt;
+@include header.nav;
+
+@include footer.ui;

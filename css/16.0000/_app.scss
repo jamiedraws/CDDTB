@@ -1,0 +1,11 @@
+@use "baf";
+@use "confidence";
+@use "offer";
+@use "review";
+
+@mixin ui {
+    @include baf.base;
+    @include confidence.base;
+    @include offer.base;
+    @include review.base;
+}

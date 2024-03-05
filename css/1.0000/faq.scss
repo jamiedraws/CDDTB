@@ -1,0 +1,5 @@
+@use "../../Shared/css/template/dtm/components/card";
+@use "../models/colors";
+
+@include card.model(".card", colors.get(second
+));

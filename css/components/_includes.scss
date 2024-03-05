@@ -1,0 +1,102 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+
+@use "../models/queries";
+
+$select: ".includes" !default;
+
+@mixin ui {
+    @include arp.apply("#{$select}__badge", math.div(1, 1), 60px) {
+        margin: 0;
+    }
+
+    #{$select} {
+        text-transform: uppercase;
+        filter: grayscale(1);
+
+        &__in {
+            padding: 0.5rem 2rem;
+        }
+
+        &__item {
+            margin: 0 1rem;
+        }
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin: 0 -1rem;
+            @media all and (max-width: queries.get(mobile)) {
+                & {
+                    text-align: center;
+                }
+            }
+        }
+
+        &__title {
+            flex: 0 1 auto;
+            font-size: 1.6em;
+            margin: 1rem;
+        }
+
+        &__offer {
+            flex: 1 1 500px;
+        }
+
+        &__payment {
+            flex: 1 1 300px;
+            margin: 1rem;
+        }
+
+        &__specs {
+            flex: 0 1 auto;
+            margin: 1rem;
+
+            > span {
+                display: block;
+            }
+        }
+
+        @media all and (max-width: queries.get(mobile)) {
+            &__payment {
+                flex: 1 1 100%;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin payment {
+    @include arp.apply(".payment__item", math.div(238, 150), 7.5em);
+
+    .payment {
+        $gap: 0.5rem;
+
+        font-size: 1rem;
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -#{$gap};
+            overflow: hidden;
+        }
+
+        &__item {
+            border: 1px solid;
+            margin: #{$gap};
+        }
+
+        @media all and (max-width: queries.get(tablet)) {
+            font-size: 0.75rem;
+            font-size: clamp(0.75rem, 2vw, 1rem);
+        }
+
+        @media all and (max-width: queries.get(mobile)) {
+            max-width: 26em;
+            margin: auto;
+        }
+    }
+}

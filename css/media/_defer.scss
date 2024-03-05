@@ -1,0 +1,17 @@
+@use "../../Shared/css/template/dtm/utils/arp";
+
+@mixin images {
+	@include arp.defer(
+		(
+			select: "[data-src-img]"
+		)
+	);
+}
+
+@mixin iframes {
+	@include arp.defer(
+		(
+			select: "[data-src-iframe]"
+		)
+	);
+}

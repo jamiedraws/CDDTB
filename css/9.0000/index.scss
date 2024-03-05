@@ -1,0 +1,33 @@
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../models/queries";
+
+@include arp.apply(".before-after-single", 550/421, 550px);
+
+.hero {
+	padding: 0;
+}
+.hero__video {
+	flex: 0 1 520px;
+}
+.hero__title,
+.hero__subtitle {
+	text-align: left;
+}
+
+@media all and (max-width: queries.get(tablet)) {
+    .media__player {
+        margin-top: 0;
+    }
+    .media__group .media__item {
+        margin: 1rem;
+        &:first-of-type {
+            margin: 0;
+        }
+    }
+}
+
+@media all and (max-width: queries.get(mobile)) {
+    .dtm__in .hero__offer .button {
+        font-size: 1.3rem;
+    }
+}

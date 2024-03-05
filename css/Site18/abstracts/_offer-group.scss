@@ -1,0 +1,37 @@
+$select: ".offer-group" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/divider-line";
+
+@mixin base {
+    #{$select} {
+        position: relative;
+
+        &__group {
+            @include group.contain;
+            justify-content: center;
+        }
+
+        &__line {
+            @include divider-line.column;
+            font-size: 1.5em;
+        }
+
+        &__burst {
+            flex-basis: 100%;
+            text-align: center;
+
+            margin: -1em;
+            position: relative;
+            z-index: 2;
+        }
+
+        @content;
+    }
+}

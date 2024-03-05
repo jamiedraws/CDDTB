@@ -1,0 +1,28 @@
+$select: ".corner-callout" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+$select: ".corner-callout" !default;
+
+@mixin base {
+    #{$select} {
+        
+        position: absolute;
+        right: -2.7em;
+        top: -1.7em;
+        background: colors.get(accent);
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1.3em;
+        transform: rotate(45deg);
+        max-width: 7em;
+        line-height: 1;
+        text-align: center;
+        padding: 2.7em 1em 0.2em;
+    
+        @content;
+    }
+}

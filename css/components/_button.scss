@@ -1,0 +1,122 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/components/button";
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+
+$select: ".button" !default;
+
+@mixin ui {
+    @include scope.for-template {
+        @include button.model($select) {
+            $color: colors.get(second);
+
+            & {
+                border-radius: 0;
+                border: 0.1em solid white;
+                background: $color;
+                box-shadow: none;
+                text-shadow: none;
+                padding: 0.75em 1em;
+                overflow: hidden;
+                @include fonts.first(2rem, 0.9) {
+                    text-transform: uppercase;
+                    font-weight: bold;
+                }
+
+                @media all and (max-width: queries.get(mobile)) {
+                    & {
+                        font-size: 1.5rem;
+                        padding: 0.7em;
+                    }
+                }
+            }
+
+            &:focus {
+                outline-color: colors.get(fifth);
+            }
+
+            &::before {
+                background: $color;
+            }
+
+            &::after {
+                background: white;
+                transform: skew(45deg) scaleX(0);
+                transform-origin: left bottom;
+                transition: transform 0.4s ease-out;
+                opacity: 1;
+            }
+
+            &:hover,
+            &:focus,
+            &--is-selected {
+                &::after {
+                    transform: skew(45deg) scaleX(2);
+                }
+            }
+
+            &--contrast {
+                color: colors.get(first);
+                border-color: colors.get(first);
+                background: white;
+
+                &::before {
+                    background: white;
+                }
+
+                &::after {
+                    background: colors.get(first);
+                }
+            }
+
+            &:hover,
+            &:focus,
+            &--is-selected {
+                text-decoration: none;
+                color: $color;
+                border-color: $color;
+            }
+
+            &--accent {
+                $color: colors.get(second);
+                border-color: $color;
+                background: $color;
+
+                &::before {
+                    background: $color;
+                }
+            }
+
+            &--accent:hover,
+            &--accent:focus,
+            &--accent.button--is-selected {
+                color: $color;
+                border-color: $color;
+            }
+
+            &--contrast:hover,
+            &--contrast:focus,
+            &--contrast.button--is-selected {
+                color: white;
+            }
+
+            &--cart {
+                $color: colors.get(seventh);
+                border-color: $color;
+                background: $color;
+
+                &::before {
+                    background: $color;
+                }
+            }
+
+            &--cart:hover,
+            &--cart:focus,
+            &--cart.button--is-selected {
+                color: $color;
+                border-color: $color;
+            }
+        }
+    }
+}

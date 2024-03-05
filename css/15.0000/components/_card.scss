@@ -1,0 +1,44 @@
+@use "sass:color";
+
+$select: ".card" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    #{$select} {
+        text-align: left;
+        box-shadow: 0 0 0.35em hsl(0deg 0% 0% / 45%);
+
+        &:not(:last-child) {
+            margin-bottom: 1em;
+        }
+
+        & &__header {
+            font-size: 1.3em;
+        }
+
+        button,
+        &__content {
+            padding: 1rem;
+            display: block;
+        }
+
+        &__content {
+            border-top: 3px solid color.adjust(colors.get(accent), $alpha: -0.7);
+
+            @include copy.separate;
+        }
+
+        &__shades {
+            font-size: 0.75em;
+        }
+
+        @content;
+    }
+}

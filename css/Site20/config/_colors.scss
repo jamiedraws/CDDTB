@@ -1,0 +1,39 @@
+@use "sass:map";
+
+$select: ".color" !default;
+
+$list: (
+    base: #232323,
+    base-light: white,
+    base-dark: black,
+    primary: #a190cb,
+    primary-grad: linear-gradient(#a190cb, #6c599a),
+    primary-dark: #63558a,
+    primary-light: #dcddfb,
+    accent: #859fb8,
+    accent-light: #dfe9fa,
+    accent-grad: linear-gradient(0deg, white 70%, hsl(209deg 26% 62% / 15%)),
+    shade: #232323,
+    shade-light: #676767,
+    logo-text: #76828a,
+    placeholder: #444444,
+    footer: #232323,
+    review: #e6e3e3
+);
+
+@function get($name) {
+    @return map.get($list, $name);
+}
+
+@mixin selectors {
+    #{$select} {
+        @each $name, $color in $list {
+            &-#{$name} {
+                color: $color;
+                font-weight: bold;
+            }
+        }
+
+        @content;
+    }
+}

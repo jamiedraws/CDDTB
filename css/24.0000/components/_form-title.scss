@@ -1,0 +1,39 @@
+$select: ".ft" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    #{$select} {
+        text-align: center;
+        padding: 2em;
+
+        @media all and (max-width: queries.set(1160)) {
+            font-size: 0.65em;
+        }
+
+        @include background.color-map(
+            colors.get(primary-grad),
+            colors.get(base-light)
+        );
+
+        &__first {
+            font: 800 fonts.em(40) / 1.4 fonts.get(bold);
+            text-transform: uppercase;
+            color: colors.get(primary-light);
+
+            margin: 0.1em 0;
+        }
+
+        &__second {
+            font-size: fonts.em(26);
+        }
+
+        @content;
+    }
+}

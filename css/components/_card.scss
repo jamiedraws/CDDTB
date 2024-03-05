@@ -1,0 +1,157 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+
+@use "../models/fonts";
+@use "../models/colors";
+@use "../models/queries";
+
+$select: ".card" !default;
+
+@mixin ui {
+    #{$select} {
+        @content;
+    }
+}
+
+@mixin product($product-card: $select) {
+    $breakpoint: 630px;
+
+    #{$product-card} {
+        border: 1px solid;
+        padding: 1rem;
+        margin: 1rem 0;
+
+        @media all and (min-width: queries.get(small)) {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        font-family: fonts.get(first);
+
+        &__columns {
+            display: block;
+            column-width: 21em;
+            column-rule: 1px solid;
+            flex: 1;
+        }
+
+        &__group {
+            @media all and (min-width: queries.get(small)) {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-start;
+                justify-content: center;
+                flex: 1 1 auto;
+            }
+
+            break-inside: avoid;
+        }
+
+        abbr {
+            color: colors.get(second);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        &__item {
+            flex: 0 1 auto;
+            margin: 0.5em;
+            align-self: center;
+        }
+
+        & &__select {
+            @media all and (min-width: queries.get(small)) {
+                min-width: 10em;
+            }
+        }
+
+        &__stamp {
+            background: black;
+            color: white;
+            padding: 1rem;
+            margin-right: auto;
+
+            @media all and (min-width: queries.get(small)) {
+                display: inline-flex;
+                justify-content: center;
+                flex: 0 0 auto;
+            }
+
+            @include fonts.first(2em, 1) {
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+
+        @media all and (max-width: 1000px) {
+            &__item {
+                min-width: 12em;
+            }
+
+            &__group {
+                text-align: center;
+            }
+        }
+
+        @media all and (max-width: $breakpoint) {
+            &__stamp {
+                margin-bottom: 1rem;
+                flex: 1 1 100%;
+            }
+
+            &__group {
+                text-align: left;
+            }
+
+            &__item {
+                flex: 1 1 10em;
+                min-width: 10em;
+            }
+        }
+
+        @media all and (min-width: $breakpoint) {
+            &__stamp {
+                flex-direction: column;
+            }
+        }
+
+        &__link {
+            flex: 1 1 100%;
+            text-align: center;
+            color: colors.get(second);
+        }
+
+        @content;
+    }
+}
+
+@mixin review($review-card: $select) {
+    #{$review-card} {
+        text-align: center;
+        padding: 1em;
+        max-width: 78rem;
+        margin: 2rem auto;
+
+        @include arp.apply("#{$review-card}__avatar", math.div(1, 1), 102px) {
+            border-radius: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+            background: colors.get(fourth);
+        }
+
+        &__text,
+        &__title {
+            font-size: 1.35em;
+        }
+
+        &__title {
+            font-weight: bold;
+            color: #343535;
+        }
+
+        @content;
+    }
+}

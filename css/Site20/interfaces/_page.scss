@@ -1,0 +1,86 @@
+@use "sass:math";
+
+// interfaces
+@use "app";
+@use "form";
+
+// layouts
+@use "../layouts/hero";
+@use "../layouts/content";
+@use "../layouts/review";
+@use "../layouts/slide";
+@use "../layouts/main-offer";
+
+// components
+@use "../../../Shared/css/template/shoppingcart/components/list";
+@use "../components/offer";
+@use "../components/media-player";
+@use "../components/form-title";
+@use "../components/accordion";
+@use "../components/card";
+
+// abstracts
+@use "../abstracts/stats-text";
+@use "../abstracts/baf";
+@use "../abstracts/shades";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+// themes
+@use "../themes/background";
+
+// config
+@use "../config/colors";
+
+@mixin index {
+    @include hero.base;
+    @include main-offer.base;
+    @include offer.base;
+
+    @include background.base;
+
+    @include stats-text.base;
+    @include media-player.base;
+
+    @include baf.base;
+
+    @include contain.new {
+        &--video {
+            @include contain.ratio(math.div(16, 9));
+            background: colors.get(placeholder);
+        }
+    }
+
+    @include content.media-player-text;
+    @include content.results;
+    @include content.shades;
+    @include content.title-image-caption;
+
+    @include review.base;
+
+    @include slide.result;
+    @include slide.review;
+}
+
+@mixin landing-page {
+    @include form.checkout;
+
+    @include form-title.base;
+    @include list.stack;
+
+    @include shades.base;
+
+    @include slide.base;
+    @include slide.instagram;
+}
+
+@mixin how-to-use {
+    @include content.easy;
+}
+
+@mixin faq {
+    @include accordion.base;
+    @include card.base;
+    @include content.faq;
+}

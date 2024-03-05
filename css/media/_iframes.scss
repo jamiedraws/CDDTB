@@ -1,0 +1,8 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+
+@mixin base {
+    @include arp.apply(".media__video", math.div(16, 9), 630px);
+
+    @content;
+}

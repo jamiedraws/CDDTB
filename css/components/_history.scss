@@ -1,0 +1,29 @@
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+
+$select: ".history" !default;
+
+@mixin ui {
+	@include arp.apply("#{$select}__image", 634/424, 314px) {
+		@media all and (min-width: queries.get(mobile)) {
+			float: left;
+			margin: 1.5em 1.5em 1.5em 0;
+
+			&:first-of-type {
+				float: right;
+				margin: 0 0 1.5em 1.5em;
+			}
+		}
+
+		@media all and (max-width: queries.get(mobile)) {
+			font-size: 1.2em;
+			margin: 1em auto;
+			max-width: none;
+		}
+	}
+
+	#{$select} {
+		@content;
+	}
+}

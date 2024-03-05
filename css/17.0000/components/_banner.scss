@@ -1,0 +1,40 @@
+$select: ".banner" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+@mixin base {
+    
+}
+
+
+@mixin promo {
+    #{$select} {
+        &--promo {
+            background: colors.get(primary-light);
+            color: colors.get(base);
+            text-align: center;
+            padding: 0.5em;
+        }
+        &-disclaimer {
+            display: none;
+            background: white;
+            text-align: center;
+            color: colors.get(black);
+            padding: 1em;
+            max-width: 90vw !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            &--promo {
+                width: 100%;
+            }
+            a {
+                display: block;
+            }
+        }
+    }
+}

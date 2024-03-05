@@ -1,0 +1,57 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+@use "../models/colors";
+
+$select: ".durable" !default;
+
+@mixin ui {
+    #{$select} {
+        position: relative;
+        text-align: center;
+
+        .section__in {
+            padding-bottom: 0;
+        }
+
+        &__group {
+            max-width: 900px;
+            margin: 2rem auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding-bottom: 3rem;
+        }
+
+        p {
+            font-size: 1.34em;
+            margin-bottom: 1em;
+        }
+
+        hr {
+            background: #f0f0f0;
+            height: 6px;
+        }
+    }
+}
+
+.icon {
+    margin: 1em;
+    flex: 1;
+    @include arp.apply("&__img", math.div(1, 1), 200px) {
+        background: #258a9e;
+        border-radius: 100%;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    @media all and (max-width: queries.get(mobile)) {
+        flex: 1 100%;
+    }
+    figcaption {
+        text-transform: uppercase;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+}

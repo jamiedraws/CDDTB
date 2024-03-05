@@ -1,0 +1,76 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+
+@use "../models/queries";
+
+$select: ".advertise" !default;
+
+@mixin ui {
+    @include arp.apply("#{$select}__product-image", math.div(72, 77), 72px) {
+        margin: 0;
+        @media all and (max-width: queries.get(mobile)) {
+            // make sure the images here align to the bottom of this container
+            .advertise__product-image {
+                order: 2;
+            }
+        }
+        @media all and (max-width: queries.get(small)) {
+            // remove 1 of the 4 that is currently here
+            .advertise__product-image:last-of-type {
+                display: none;
+            }
+        }
+    }
+
+    #{$select} {
+        font-weight: 900;
+
+        &__in {
+            padding: 4rem 2rem;
+        }
+
+        &__group {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        &__title {
+            flex: 1 100%;
+            font-size: 3.2em;
+        }
+
+        &__description {
+            align-self: flex-start;
+            padding: 0 2rem;
+            font-size: 1.5em;
+            font-weight: 500;
+        }
+
+        @media all and (max-width: queries.get(tablet)) {
+            font-size: calc(0.8em + 1vw);
+            font-size: clamp(0.8em, 3vw, 2em);
+
+            &__in {
+                padding: 1em;
+            }
+
+            &__title,
+            &__description {
+                font-size: 1em;
+            }
+
+            & picture {
+                display: none;
+            }
+        }
+
+        @media all and (max-width: queries.get(mobile)) {
+            display: none;
+        }
+
+        @content;
+    }
+}

@@ -1,0 +1,50 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+@use "../models/colors";
+@use "../models/fonts";
+
+$select: ".more-info" !default;
+
+@mixin ui {
+    #{$select} {
+        position: relative;
+        text-align: center;
+
+        &__in {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin: 0 -2rem;
+            overflow: hidden;
+        }
+
+        &__item {
+            margin: 1rem;
+            flex: 1 350px;
+        }
+
+        &__title {
+            @include fonts.first(1.66em, 1) {
+                font-weight: 700;
+            }
+            color: inherit;
+        }
+
+        p {
+            margin: 0.6em auto 0;
+            max-width: 30rem;
+        }
+    }
+
+    @include arp.apply("#{$select}__img", math.div(350, 250), 350px) {
+        margin: 0 auto;
+    }
+}

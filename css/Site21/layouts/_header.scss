@@ -1,0 +1,37 @@
+$select: ".header" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        color: colors.get(primary);
+
+        &__group {
+            @include group.contain;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        &__logo {
+            color: colors.get(logo-text);
+        }
+
+        &__title {
+            font-weight: 500;
+            font-size: fonts.rem(38);
+            line-height: 1.2;
+        }
+
+        @media all and (max-width: queries.get(nav-max)) {
+            display: none;
+        }
+
+        @content;
+    }
+}

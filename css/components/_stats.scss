@@ -1,0 +1,83 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+@use "../models/fonts";
+@use "../models/colors";
+
+$select: ".stats" !default;
+
+@mixin ui {
+    #{$select} {
+        position: relative;
+        text-align: center;
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            max-width: 1125px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        &__item {
+            text-align: left;
+            margin: 2rem;
+            flex: 1 350px;
+        }
+
+        &__title {
+            font-size: 4em;
+            line-height: 1;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.34em;
+            margin-bottom: 1em;
+        }
+
+        @include arp.apply("#{$select}__img", math.div(400, 299), 400px) {
+            margin: 0 auto;
+        }
+
+        &--alt {
+            @media all and (max-width: queries.get(mobile)) {
+                .section__in {
+                    padding: 1em;
+                }
+
+                .stats__item {
+                    margin: 0 0 1rem;
+                }
+            }
+        }
+    }
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    font-size: 1.7em;
+    line-height: 1.15;
+    dt {
+        @include fonts.second(3.15em, 1);
+        font-weight: 600;
+        margin: 0 1.5rem 0 0;
+        color: colors.get(second);
+    }
+
+    &--alt {
+        dt {
+            @include fonts.first(2em, 1);
+            font-weight: 700;
+        }
+    }
+
+    @media all and (max-width: queries.get(mobile)) {
+        font-size: 1.2em;
+    }
+}

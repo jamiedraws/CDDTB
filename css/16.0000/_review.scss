@@ -1,0 +1,41 @@
+$select: ".review" !default;
+
+@mixin base {
+    #{$select} {
+        &__title {
+            font-size: 2em;
+        }
+
+        &__section {
+            margin: 1em auto 1em 0;
+            max-width: 50%;
+            color: white;
+
+            .card__text {
+                max-width: 25em;
+            }
+
+            .card__title {
+                color: white;
+            }
+
+            .slide__nav button {
+                background: none;
+                border: none;
+                color: #a190cb;
+                box-shadow: none;
+                font-size: 3em;
+            }
+
+            .slide__thumbnail {
+                color: #a190cb;
+                font-size: 1.25em;
+            }
+
+            .slide__thumbnail--is-selected::after {
+                background: #232323;
+            }
+        }
+        @content;
+    }
+}

@@ -1,0 +1,42 @@
+$select: ".stats-text" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        list-style: none;
+        margin-left: 0;
+
+        li {
+            @include group.gutter;
+
+            display: flex;
+            align-items: center;
+
+            > b {
+                flex: 0 0 1.8em;
+            }
+
+            > span {
+                flex: 0 0 16em;
+            }
+        }
+
+        b {
+            color: colors.get(accent);
+            font: fonts.em(70) fonts.get(light);
+        }
+
+        span {
+            font-size: fonts.em(22);
+        }
+
+        @content;
+    }
+}

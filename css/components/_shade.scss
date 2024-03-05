@@ -1,0 +1,54 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+@use "../models/colors";
+
+$select: ".shades" !default;
+
+@mixin ui {
+    #{$select} {
+        position: relative;
+        text-align: center;
+        padding-bottom: 3rem;
+
+        &__group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        p {
+            font-size: 1.34em;
+            margin-bottom: 1em;
+        }
+    }
+}
+
+.shade {
+    @include arp.apply(".shade__img", math.div(1, 1), 95px) {
+        border: 1px solid white;
+    }
+    img {
+        margin: 0;
+    }
+    flex: 0 1 95px;
+    figcaption {
+        text-transform: uppercase;
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+}
+
+.dtm .shade {
+    margin: 0.5em;
+    @media all and (min-width: queries.get(small)) {
+        flex: 0 1 5.2em;
+    }
+}
+
+.theme--dark .shade {
+    .shade__img {
+        border: 1px solid white;
+    }
+}

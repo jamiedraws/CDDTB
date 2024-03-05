@@ -1,0 +1,15 @@
+@use "sass:map";
+
+$list: (
+	first: #2e3034,
+	second: #258a9e,
+	third: #3b3b3b,
+	fourth: #ededed,
+	fifth: #e5b23d,
+	sixth: #8a8c92,
+	seventh: #1ca01c
+);
+
+@function get($name) {
+	@return map.get($list, $name);
+}

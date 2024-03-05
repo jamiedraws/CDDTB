@@ -1,0 +1,82 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../models/queries";
+
+@include arp.apply(".before-after-single", math.div(550, 421), 550px);
+@include arp.apply(".media__img", math.div(528, 271), 528px);
+@include arp.apply(".great-img", math.div(339, 255), 339px);
+@include arp.apply(".mbg", math.div(150, 150), 132px);
+
+.hero {
+    padding: 0;
+}
+.hero__video {
+    flex: 0 1 520px;
+}
+.hero__title,
+.hero__subtitle {
+    text-align: left;
+}
+
+.group--great {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    font: bold italic 2.5rem/1 gotham, sans-serif;
+    > * {
+        flex: 1 1 287px;
+        margin: 0;
+    }
+
+    picture,
+    img {
+        margin: 0 auto;
+    }
+
+    figcaption {
+        margin: 1em 0;
+    }
+}
+
+.stat em {
+    font-style: italic;
+}
+
+@media all and (max-width: queries.get(tablet)) {
+    .media__player {
+        margin-top: 0;
+    }
+    .media__group .media__item {
+        margin: 1rem;
+        &:first-of-type {
+            margin: 0;
+        }
+    }
+}
+
+@media all and (max-width: queries.get(mobile)) {
+    .dtm__in .hero__offer .button {
+        font-size: 1.3rem;
+    }
+}
+
+.hero {
+    &__shipping {
+        font-size: 3.5em;
+
+        > span {
+            font-size: 0.4em;
+        }
+    }
+}
+
+.popup {
+    &__group {
+        display: block;
+
+        @supports (display: flex) {
+            display: flex;
+        }
+    }
+}

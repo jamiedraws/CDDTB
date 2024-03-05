@@ -1,0 +1,109 @@
+$select: ".blackfriday-banner" !default;
+
+// config
+@use "./../config/fonts";
+@use "./../config/queries";
+@use "./../config/colors";
+
+// abstracts
+@use "Shared/scss/templates/base/abstracts/background";
+
+@mixin base {
+    #{$select} {
+        img {
+            object-fit: contain;
+        }
+
+        @include background.color-map(
+            $background-color: colors.get(base),
+            $text-color: white
+        ) {
+        }
+
+        @include background.image-container() {
+        }
+
+        &__background {
+            @include background.image-background;
+        }
+
+        &__grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-areas: "header image" "save image";
+            justify-items: center;
+
+            height: 100%;
+
+            margin-top: 0;
+            margin-bottom: 0;
+
+            position: relative;
+        }
+
+        &__header {
+            grid-area: header;
+
+            align-self: end;
+
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+
+            > img {
+                max-width: queries.em(355);
+            }
+        }
+
+        &__save {
+            grid-area: save;
+
+            align-self: start;
+
+            display: flex;
+            gap: 1rem;
+
+            > img {
+                max-width: queries.em(170);
+            }
+        }
+
+        &__image {
+            grid-area: image;
+
+            align-self: end;
+        }
+
+        &__standfirst {
+            align-self: center;
+            flex: 0 0 6em;
+
+            @include background.color-map(
+                $background-color: colors.get(primary-light),
+                $text-color: colors.get(base)
+            ) {
+            }
+
+            font-size: fonts.em(22);
+            line-height: 1.2;
+            text-align: center;
+            padding: 0.5em;
+        }
+
+        @media all and (max-width: queries.set(1100)) {
+            font-size: clamp(0.5em, 2.3vw, 1em);
+
+            &__grid {
+                grid-template-areas: "header" "save" "image";
+
+                padding: 1rem 1rem 0;
+            }
+
+            &__image {
+                max-width: 30em;
+            }
+        }
+
+        @content;
+    }
+}

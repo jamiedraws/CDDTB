@@ -1,0 +1,71 @@
+@use "../models/queries";
+
+$select: ".banner" !default;
+
+@mixin ui {
+
+  @keyframes pointing {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(1em);
+    }
+  }
+
+  #{$select} {
+
+    & {
+        background: linear-gradient(to bottom,#efe8b7,#e1ca67);
+        color: #222;
+        font-size: 1.6em;
+        font-weight: 500;
+        padding: 0.6em 0;
+        text-align: center;
+    }
+
+    & em {
+        font-style: italic;
+    }
+
+    & a {
+        text-decoration: underline;
+        font-weight: 400;
+        text-transform: none;
+    }
+
+    & strong {
+        font-weight: 800;
+    }
+
+    &__time {
+      display: inline-block;
+      margin-right: 1em;
+      background: #ce0000;
+      padding: 0.25em 1.25em 0.25em 0.75em;
+      color: white;
+      font-weight: 800;
+      clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+      animation-name: pointing;
+      animation-duration: 1s;
+      animation-delay: 4s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate-reverse;
+    }
+
+    @media all and (max-width: queries.get(nav)) {
+      position: absolute;
+      top: 6.1em;
+      width: 100%;
+      font-size: 1.1em;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      &__time {
+        margin-right: 1.7em;
+      }
+    }
+
+    @content;
+  }
+}

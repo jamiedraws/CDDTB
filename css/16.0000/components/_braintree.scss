@@ -1,0 +1,39 @@
+@use "sass:map";
+
+$select: ".braintree-hosted-fields" !default;
+$alias: ".btHostedField" !default;
+
+// components
+@use "../../../Shared/css/template/base/components/validate";
+
+@mixin base {
+    #{$select} {
+        &-focused {
+            outline: 1px auto currentColor;
+            box-shadow: none;
+        }
+
+        &-invalid {
+            outline-color: map.get(validate.$colors, invalid);
+        }
+
+        &-valid {
+            outline-color: map.get(validate.$colors, valid);
+        }
+
+        @content;
+    }
+}
+
+@mixin alias {
+    #{$alias} {
+        width: 100%;
+        min-height: 4.6em;
+        padding: 1em;
+        border-color: currentColor;
+        font-size: 11px;
+        margin: 0;
+
+        @content;
+    }
+}

@@ -1,0 +1,192 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../models/queries";
+
+// abstracts
+@use "../../Shared/css/template/base/abstracts/group";
+
+@include arp.apply(".option__set-image", math.div(528, 271), 380px);
+@include arp.apply(".option__single-image", math.div(120, 202), 98px);
+
+.dtm .c-brand--form__fieldset {
+    border: 1px solid black;
+}
+
+.options {
+    display: block;
+    padding: 0 1rem;
+
+    &--subscription {
+        @include group.contain(1rem);
+        @include group.flexchild(1 1 20em);
+
+        padding: 2rem;
+    }
+}
+
+.option {
+    background: #eeeeee;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    border: none;
+    padding: 1.5em 1em;
+    &__title {
+        margin-bottom: 0.3em;
+        line-height: 1;
+    }
+    &__input {
+        flex: 0 1 auto;
+        margin: 0 0.75em 0.75em;
+    }
+    & &__text {
+        text-align: left;
+        padding-top: 0;
+    }
+    & &__includes {
+        margin: 1.5em 0 1em;
+        min-height: 0;
+        font-weight: normal;
+        strong {
+            font-weight: 500;
+            font-size: 1.2em;
+        }
+    }
+    & &__offer {
+        justify-content: flex-start;
+        align-items: flex-end;
+        margin: 0;
+        min-height: 0;
+        line-height: 1;
+        flex-wrap: wrap;
+    }
+
+    &__input-text {
+        @include group.contain;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    & &__text {
+        font-size: 1.25em;
+        padding: 0;
+    }
+
+    &__shipping {
+        font-size: 1.5em;
+        padding-top: 1em;
+    }
+
+    &__image {
+        margin: 1em auto;
+        text-align: center;
+        align-self: center;
+        font-style: italic;
+        > picture,
+        img {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        figcaption {
+            margin: 1em auto;
+            font-size: 1.33em;
+        }
+    }
+    &__offer {
+        > * {
+            margin-right: 0.33em;
+        }
+        font-size: 1.2em;
+        font-family: "Proxima Nova", sans-serif;
+    }
+    &:hover,
+    &:focus {
+        outline: 2px solid black;
+    }
+
+    &--single &__image {
+        @include group.contain;
+        margin: 1em 0;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.dtm .option .offer {
+    &__savings {
+        color: #258a9e;
+        font-family: "Proxima Nova Semibold", sans-serif;
+        font-weight: 400;
+        margin-top: auto;
+        margin-bottom: 0;
+    }
+    &__strike {
+        text-decoration: line-through;
+    }
+    &__price {
+        font-size: 1.8em;
+        font-family: "Proxima Nova Semibold", sans-serif;
+        font-weight: 400;
+        margin-left: 0;
+    }
+}
+
+.or {
+    margin: -1em auto;
+    position: relative;
+    z-index: 11;
+}
+
+.dtm .shade {
+    flex: 1 1 100px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "gotham";
+    font-weight: bold;
+    font-size: 1.3em;
+    line-height: 1;
+    padding: 0.25em;
+    &__img {
+        margin: 0 auto 0.25em;
+    }
+
+    &--label {
+        &:hover,
+        &:focus {
+            background: #eaeaea;
+        }
+    }
+
+    .input {
+        display: block;
+        margin: 0.33em auto;
+    }
+}
+
+@media all and (max-width: 775px) {
+    .option {
+        flex-wrap: wrap;
+        &__image {
+            flex: 0 1 100%;
+        }
+        &__text {
+            flex: 1 1 22em;
+        }
+    }
+    .or {
+        font-size: 1em;
+    }
+}
+
+@media all and (min-width: queries.get(tablet)) {
+    .options:not(.options--subscription) {
+        padding: 1rem 2rem;
+    }
+}
+
+@media all and (max-width: queries.get(tablet)) {
+}
+
+@media all and (max-width: queries.get(mobile)) {
+}

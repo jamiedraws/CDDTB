@@ -1,0 +1,49 @@
+$select: ".promo-banner" !default;
+
+// config
+@use "./../config/colors";
+@use "./../config/queries";
+
+// abstracts
+@use "Shared/scss/templates/base/abstracts/background";
+
+@mixin base {
+    #{$select} {
+        flex: 1;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        line-height: 1.1;
+
+        @include background.color-map(
+            $background-color: colors.get(shade),
+            $text-color: white
+        ) {
+        }
+
+        b {
+            color: #dcddfb;
+        }
+
+        &__link {
+            color: currentColor;
+            text-decoration: underline;
+
+            font: inherit;
+            font-style: italic;
+        }
+
+        @media all and (max-width: queries.set(900)) {
+            &__text {
+                max-width: 24em;
+                margin: auto;
+
+                > span {
+                    display: block;
+                }
+            }
+        }
+
+        @content;
+    }
+}

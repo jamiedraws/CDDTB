@@ -1,0 +1,33 @@
+$select: ".accordion" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// components
+@use "../../../Shared/css/template/base/components/accordion";
+
+@mixin base {
+    @include accordion.base;
+
+    #{$select} {
+        &__header {
+        }
+
+        &__button {
+            display: block;
+            width: 100%;
+            text-align: left;
+
+            transition: all 0.3s ease-in-out;
+
+            &[aria-expanded="true"] {
+                color: colors.get(base-light);
+                background: colors.get(accent);
+            }
+        }
+
+        @content;
+    }
+}

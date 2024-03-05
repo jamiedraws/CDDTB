@@ -1,0 +1,110 @@
+@use "sass:map";
+@use "colors";
+
+$list: (
+	first: gotham,
+	second: atrament-web
+);
+
+$-size: 1rem;
+$-line-height: 1;
+
+@mixin init {
+	@font-face {
+		font-family: map.get($list, first);
+		font-weight: normal;
+		font-display: fallback;
+		src: url(/shared/webfonts/gotham/book/Gotham-Book.woff2)
+				format("woff2"),
+			url(/shared/webfonts/gotham/book/Gotham-Book.woff)
+				format("woff");
+	}
+
+	@font-face {
+		font-family: map.get($list, first);
+		font-weight: 500;
+		font-style: normal;
+		font-display: fallback;
+		src: url(/shared/webfonts/gotham/medium/Gotham-Medium.woff2)
+				format("woff2"),
+			url(/shared/webfonts/gotham/medium/Gotham-Medium.woff)
+				format("woff");
+	}
+
+	@font-face {
+		font-family: map.get($list, first);
+		font-weight: 500;
+		font-style: italic;
+		font-display: fallback;
+		src: url(/shared/webfonts/gotham/medium-italic/Gotham-MediumItalic.woff2)
+				format("woff2"),
+			url(/shared/webfonts/gotham/medium-italic/Gotham-MediumItalic.woff)
+				format("woff");
+	}
+
+	@font-face {
+		font-family: map.get($list, first);
+		font-weight: bold;
+		font-display: fallback;
+		src: url(/shared/webfonts/gotham/bold/Gotham-Bold.woff2)
+				format("woff2"),
+			url(/shared/webfonts/gotham/bold/Gotham-Bold.woff)
+				format("woff");
+	}
+
+	@font-face {
+		font-family: map.get($list, first);
+		font-weight: bold;
+		font-style: italic;
+		font-display: fallback;
+		src: url(/shared/webfonts/gotham/bold-italic/Gotham-BoldItalic.woff2)
+				format("woff2"),
+			url(/shared/webfonts/gotham/bold-italic/Gotham-BoldItalic.woff)
+				format("woff");
+	}
+
+	@font-face {
+		font-family: map.get($list, first);
+		font-weight: 800;
+		font-display: fallback;
+		src: url(/shared/webfonts/gotham/black/Gotham-Black.woff2)
+				format("woff2"),
+			url(/shared/webfonts/gotham/black/Gotham-Black.woff)
+				format("woff");
+	}
+
+	@font-face {
+		font-family: map.get($list, first);
+		font-weight: 900;
+		font-display: fallback;
+		src: url(/shared/webfonts/gotham/ultra/Gotham-Ultra.woff2)
+				format("woff2"),
+			url(/shared/webfonts/gotham/ultra/Gotham-Ultra.woff)
+				format("woff");
+	}
+
+}
+
+@mixin first($size: $-size, $line-height: $-line-height) {
+	font: #{$size}/#{$line-height} map.get($list, first), sans-serif;
+	@content;
+}
+
+@mixin second($size: $-size, $line-height: $-line-height) {
+	font: #{$size}/#{$line-height} map.get($list, second), sans-serif;
+	@content;
+}
+
+@mixin third($size: $-size, $line-height: $-line-height) {
+	@include first($size, $line-height);
+	@content;
+}
+
+@mixin fourth($size: $-size, $line-height: $-line-height) {
+	@include second($size, $line-height);
+	@content;
+}
+
+@function get($name) {
+	@return map.get($list, $name);
+}

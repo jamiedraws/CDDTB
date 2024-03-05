@@ -1,0 +1,270 @@
+$select: ".content" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/copy";
+
+@mixin base {
+    #{$select} {
+        &__group {
+            @include group.contain;
+            align-items: center;
+        }
+
+        h1,
+        h2 {
+            font: 800 fonts.em(40) / 1.1 fonts.get(bold);
+            text-transform: uppercase;
+            color: colors.get(primary);
+        }
+
+        h3 {
+            font-weight: 700;
+            font-size: fonts.rem(30);
+        }
+
+        h3 {
+            + p {
+                margin-top: 0;
+            }
+        }
+
+        p,
+        ol {
+            font-size: fonts.em(19);
+        }
+
+        &__header {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            @include copy.separate;
+        }
+
+        &__footer {
+            text-align: center;
+        }
+
+        &__text {
+            @include copy.separate;
+        }
+
+        &__video {
+            text-align: center;
+            flex-basis: 28em;
+        }
+
+        @content;
+    }
+}
+
+@mixin faq {
+    #{$select} {
+        &--faq {
+            #{$select} {
+                &__title {
+                    &:not(:first-child) {
+                        margin-top: 2em;
+                    }
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin results {
+    #{$select} {
+        &--results {
+            #{$select} {
+                &__header {
+                    max-width: 63em;
+                }
+            }
+
+            @media all and (max-width: queries.set(600)) {
+                h2 {
+                    font-size: 1.75em;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin shades {
+    #{$select} {
+        &--shades {
+            #{$select} {
+                &__header {
+                    max-width: 65em;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin easy {
+    #{$select} {
+        &--easy {
+            picture {
+                background: colors.get(shade);
+                border-radius: 100%;
+                overflow: hidden;
+                max-width: fonts.em(243);
+                margin: auto;
+            }
+
+            #{$select} {
+                &__title {
+                    text-align: center;
+                    margin: 1em 0;
+                }
+
+                &__video {
+                    max-width: 40em;
+                    margin: auto;
+                    margin-bottom: 2em;
+                }
+
+                &__group {
+                    align-items: flex-start;
+                }
+
+                &__step {
+                    flex-basis: 15em;
+
+                    figcaption {
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: flex-start;
+                        margin: 1em 0 0;
+                    }
+
+                    @media only screen and (max-width: 800px) {
+                        figcaption {
+                            justify-content: center;
+                        }
+                    }
+                }
+
+                &__number {
+                    font-style: italic;
+                    margin: 0 0.5em 0;
+                    font-size: 1.4em;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin mbg {
+    #{$select} {
+        &--mbg {
+            display: none;
+            text-align: center;
+
+            picture {
+                margin: 1em;
+            }
+
+            img {
+                margin: auto;
+            }
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin media-player-text {
+    #{$select} {
+        &--media-player-text {
+            h2 {
+                color: colors.get(accent);
+                font: fonts.em(48) fonts.get(light);
+                text-transform: capitalize;
+            }
+
+            #{$select} {
+                &__video {
+                    flex-basis: 38em;
+                }
+
+                &__text {
+                    flex-basis: 32em;
+                }
+            }
+
+            @media all and (max-width: queries.set(600)) {
+                font-size: 2.75vw;
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin title-image-caption {
+    #{$select} {
+        &--title-image-caption {
+            #{$select} {
+                &__header {
+                    max-width: 64em;
+                }
+            }
+
+            h2 {
+                font: fonts.em(42) / 1.1 fonts.get(light);
+                text-transform: capitalize;
+
+                @supports (text-transform: initial) {
+                    text-transform: initial;
+                }
+            }
+
+            figure {
+                @include copy.separate;
+                text-align: center;
+                margin-top: 2em;
+
+                @media only screen and (max-width: 850px) {
+                    flex-basis: 100%;
+                }
+            }
+
+            picture {
+                display: inline-block;
+                border-radius: 100%;
+                background: colors.get(shade-light);
+                overflow: hidden;
+                width: auto;
+            }
+
+            figcaption {
+                margin-top: 0.5em;
+                color: colors.get(primary);
+                font: fonts.em(31) / 1 fonts.get(bold);
+
+                display: flex;
+                flex-direction: column;
+            }
+
+            @content;
+        }
+    }
+}

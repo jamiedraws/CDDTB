@@ -1,0 +1,166 @@
+@use "../../Shared/css/template/dtm/utils/scope";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/components/button";
+
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+
+@use "../layouts/reset";
+@use "../layouts/view";
+@use "../layouts/section";
+
+@use "../components/offer";
+@use "../components/deal";
+@use "../components/advertise";
+@use "../components/review";
+@use "../components/shade";
+@use "../components/popup";
+@use "../components/options";
+
+@mixin ui {
+	html {
+		// removing this since js eflex scrolling is running
+		//scroll-behavior: smooth;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+	}
+
+	body {
+		@supports (display: flex) {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+	:focus,
+	a:focus,
+	button:focus,
+	label:focus {
+		outline: 2px solid colors.get(first);
+	}
+
+	main:not(.hero) {
+		min-height: 100vh;
+	}
+
+	@include scope.for-template {
+		background: white;
+		color: colors.get(first);
+
+		@include fonts.first(15px, 1.4) {
+			font-weight: 400;
+
+			@media all and (max-width: 500px) {
+				font-size: 16px;
+			}
+		}
+	}
+
+	h2,
+	.h2 {
+		@include fonts.first(2.75em, 1.2);
+		font-weight: bold;
+		color: currentColor;
+		@media all and (max-width: queries.get(mobile)) {
+			& {
+				font-size: 1.6em;
+			}
+		}
+	}
+
+	h3,
+	.h3 {
+		@include fonts.first(2.8em, 1);
+		color: currentColor;
+	}
+
+	ul,
+	ol {
+		margin-left: 1.5em;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		width: auto;
+	}
+
+	iframe,
+	picture {
+		display: block;
+	}
+
+	figure {
+		margin: 0;
+	}
+
+	::selection {
+		background: colors.get(first);
+		color: white;
+	}
+
+	@content;
+}
+
+@mixin reset {
+	@include reset.ui;
+	@content;
+}
+
+@mixin typefaces {
+	@include fonts.init;
+	@content;
+}
+
+@mixin view {
+	@include view.ui;
+	@include view.nav-is-hidden;
+	@content;
+}
+
+@mixin section {
+	@include section.ui;
+	@content;
+}
+
+@mixin offer {
+	@include offer.ui;
+	@include offer.payment-icons;
+	@content;
+}
+
+@mixin deal {
+	@include deal.ui;
+	@content;
+}
+
+@mixin advertise {
+	@include advertise.ui;
+	@content;
+}
+
+@mixin review {
+	@include review.ui;
+	@content;
+}
+
+@mixin shade {
+	@include shade.ui;
+	@content;
+}
+
+@mixin popup {
+	@include popup.ui;
+	@content;
+}
+
+@mixin options {
+	@include options.ui;
+	@content;
+}
+
+// include custom fonts for entire site
+@include typefaces;

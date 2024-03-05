@@ -1,0 +1,138 @@
+@use "sass:map";
+@use "sass:math";
+
+$scroll-offset: 2em !default;
+
+$sizes: (
+    desktop: 75rem,
+    base-font: 1
+);
+
+// layouts
+@use "../../../Shared/css/template/base/layouts/document";
+
+@use "../../../Shared/css/template/base/layouts/section" with (
+    $container: map.get($sizes, desktop),
+    $frame: 1rem,
+    $space: 1rem
+);
+
+// components
+@use "../../../Shared/css/template/base/components/list";
+
+// utils
+@use "../../../Shared/css/template/base/utils/unit-conversion" as convert with (
+    $base: map.get($sizes, base-font)
+);
+@use "Shared/scss/templates/base/utils/view";
+@use "../../../Shared/css/template/dtm/utils/scope";
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+@function get-scroll-offset($element-height: 100) {
+    @return calc(#{queries.em($element-height)} + #{$scroll-offset});
+}
+
+@mixin base {
+    @include document.base;
+    @include fonts.request;
+
+    @include list.new {
+        &--inline {
+            @include list.inline;
+        }
+
+        &--bullet-block {
+            @include list.bullet($size: 1em) {
+                color: colors.get(accent);
+            }
+
+            a:not(:focus):not(:hover) {
+                text-decoration: none;
+            }
+        }
+
+        &--convert-inline-to-grid {
+            @media all and (min-width: queries.set(980)) {
+                @include list.inline;
+            }
+
+            @media all and (max-width: queries.set(979)) {
+                @include list.convert-to-grid($width: 15em);
+            }
+        }
+    }
+
+    @include scope.get-root {
+        scroll-padding-top: get-scroll-offset(129);
+
+        @media all and (max-width: queries.get(nav-max)) {
+            scroll-padding-top: get-scroll-offset(117);
+        }
+
+        font-size: #{map.get($sizes, base-font)}rem;
+
+        @media all and (max-width: queries.get(document-mobile-portrait)) {
+            font-size: clamp(
+                #{math.div(map.get($sizes, base-font), 2)}rem,
+                3.5vw,
+                #{map.get($sizes, base-font)}rem
+            );
+        }
+    }
+
+    @include scope.for-template {
+        font: fonts.rem(16) fonts.get(base);
+        line-height: 1.45;
+        color: colors.get(base);
+    }
+
+    h2 {
+        font-size: fonts.rem(60);
+    }
+
+    @include contain.new {
+        &--video {
+            @include contain.ratio(math.div(16, 9));
+            background: colors.get(shade);
+        }
+    }
+
+    input {
+        line-height: inherit;
+    }
+
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    [data-src-img] > img {
+        opacity: 0;
+    }
+
+    @include view;
+    @include section;
+}
+
+@mixin view {
+    @include view.base;
+
+    @include view.set-anchor-position(
+        $static-amount: -#{$scroll-offset},
+        $dynamic-amount: -#{$scroll-offset}
+    );
+
+    @include view.zero-anchor-position("[data-viewport]");
+}
+
+@mixin section {
+    @include section.new;
+}

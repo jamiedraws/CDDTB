@@ -1,0 +1,66 @@
+$select: ".logo-text" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        &__group {
+            @include group.contain(0.5em);
+
+            align-items: center;
+            text-decoration: none;
+            flex-wrap: nowrap;
+
+            @media only screen and (max-width: queries.set(1240)) {
+                font-size: 2em;
+            }
+        }
+
+        &__logo {
+            fill: currentColor;
+            width: 6em;
+            height: 3em;
+        }
+
+        &__text {
+            color: currentColor;
+            font-size: fonts.em(16);
+            text-transform: uppercase;
+        }
+
+        @content;
+    }
+
+    @include stack;
+}
+
+@mixin stack {
+    #{$select} {
+        &--stack {
+            text-align: center;
+
+            #{$select} {
+                &__group {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                &__logo {
+                    max-width: 7em;
+                }
+
+                &__text {
+                    font-size: 0.8em;
+                }
+            }
+
+            @content;
+        }
+    }
+}

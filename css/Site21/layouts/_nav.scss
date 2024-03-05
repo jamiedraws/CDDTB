@@ -1,0 +1,81 @@
+$select: ".nav" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// layouts
+@use "../../../Shared/css/template/base/layouts/nav" with
+    (
+        $colors: (
+            background: colors.get(primary),
+            button-open: colors.get(base-light),
+            button-close: colors.get(base-dark)
+        ),
+        $mq: (
+            container-min: queries.get(nav-min),
+            container-max: queries.get(nav-max)
+        )
+    );
+
+@mixin base {
+    @include nav.new {
+        color: colors.get(base-light);
+        box-shadow: none;
+        z-index: 3;
+
+        &__in {
+            padding: 0;
+            max-width: calc(75rem + 2rem);
+        }
+    }
+
+    @include nav.bar {
+        &__pane &__logo {
+            display: none;
+        }
+
+        &__list {
+            justify-content: flex-end;
+
+            > a {
+                flex: 0 1 auto;
+
+                &:not(:last-child):after {
+                    content: "|";
+                    position: relative;
+                    left: 1em;
+                }
+            }
+        }
+
+        &__link {
+            padding: 1rem;
+        }
+    }
+
+    @include nav.drawer {
+        &__in > &__logo {
+            font-size: 0.4em;
+        }
+
+        &__logo {
+            font-size: 0.5em;
+        }
+
+        &__label {
+            margin-right: 1em;
+        }
+
+        &__pane {
+            &::before {
+                // background: colors.get(shade);
+            }
+        }
+    }
+
+    #{$select} {
+        @content;
+    }
+}

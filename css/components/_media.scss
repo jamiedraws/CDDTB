@@ -1,0 +1,116 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+@use "../models/colors";
+
+$select: ".media" !default;
+
+@mixin ui {
+    #{$select} {
+        position: relative;
+        text-align: center;
+
+        &__in {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0 -2rem;
+            overflow: hidden;
+        }
+
+        &__player {
+            flex: 1 1 33em;
+        }
+
+        &__item {
+            margin: 2rem;
+            flex: 1 350px;
+        }
+
+        &__copy {
+            flex: 1 1 400px;
+
+            h2 {
+                text-align: left;
+                font-size: 2em;
+                margin-bottom: 1rem;
+            }
+
+            ul {
+                font-size: 1.1em;
+            }
+
+            li {
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            strong {
+                text-transform: uppercase;
+            }
+        }
+
+        &__title {
+            font-size: 2.6em;
+            line-height: 1;
+            font-weight: 800;
+            color: colors.get(second);
+        }
+
+        &__player {
+            $gap: 0.5rem;
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                margin: #{$gap} -#{$gap};
+                font-size: 0.9em;
+            }
+
+            .button {
+                flex: 1 1 8em;
+                margin: #{$gap};
+                padding: 0.65em 0.25em;
+                font-weight: 800;
+                @media all and (min-width: queries.get(tablet)) {
+                    font-size: 1.6em;
+                }
+            }
+        }
+
+        &__picture {
+            background: #111;
+            margin: auto;
+        }
+
+        &--alt {
+            #{$select}__item {
+                margin: 1rem;
+            }
+            & .section__in {
+                padding-top: 1em;
+            }
+            @media all and (max-width: queries.get(mobile)) {
+                .section__in {
+                    padding-top: 1em;
+                }
+            }
+        }
+    }
+
+    @include arp.apply("#{$select}__video", math.div(651, 372), 651px) {
+        border: 1px solid white;
+    }
+
+    @include arp.apply("#{$select}__img", math.div(487, 306), 487px) {
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,260 @@
+$select: ".option" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// components
+@use "../../../Shared/css/template/base/components/list";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/copy";
+
+// utils
+@use "../utils/select";
+
+@mixin base {
+    #{$select} {
+        display: block;
+        background: #e2e2e2;
+        padding: 1.5em;
+
+        &__group {
+            @include group.contain;
+            justify-content: flex-start;
+
+            @media only screen and (max-width: 1203px) {
+                justify-content: center;
+            }
+        }
+
+        &__price {
+            font-size: 1em;
+        }
+
+        &__strike {
+            text-decoration: line-through;
+        }
+
+        &__caption {
+            font: fonts.em(33) fonts.get(light);
+        }
+
+        &__product-caption {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-basis: 28em;
+            position: relative;
+
+            @media all and (max-width: queries.set(640)) {
+                font-size: 2.25vw;
+            }
+        }
+
+        &__text {
+            flex-basis: 36em;
+            position: relative;
+            .burst {
+                position: absolute;
+                bottom: 2em;
+                right: 3em;
+                font-size: 1.4em;
+                z-index: 3;
+                @media all and (max-width: queries.set(640)) {
+                    font-size: 1em;
+                    bottom: 6em;
+                    right: 0.25em;
+                }
+            }
+        }
+
+        &__title {
+            font: 800 fonts.em(30) fonts.get(bold);
+            text-transform: uppercase;
+            line-height: 1.15;
+        }
+
+        &__gifts {
+            font: 800 fonts.em(20) fonts.get(bold);
+            text-transform: uppercase;
+            color: colors.get(primary);
+            display: block;
+        }
+
+        &__copy {
+            @include copy.separate;
+
+            @media all and (min-width: queries.set(700)) {
+                margin-left: 3.25em;
+            }
+        }
+
+        &__includes {
+            display: block;
+            margin: 1em 0 2em;
+
+            @include copy.separate;
+
+            strong {
+                font-size: fonts.em(20);
+                font-weight: normal;
+                text-transform: uppercase;
+                margin-top: 1em;
+            }
+
+            ul {
+                margin-top: 0.1em;
+            }
+        }
+
+        &__offer {
+            align-items: flex-end;
+            justify-content: flex-start;
+            line-height: 1;
+        }
+
+        &__price-desc {
+            font-size: fonts.em(20);
+        }
+
+        &__shipping {
+            color: colors.get(accent);
+            font-size: fonts.em(25);
+        }
+
+        &__bonus-caption {
+            text-align: center;
+            font-size: fonts.em(15);
+            line-height: 1;
+
+            > b {
+                display: block;
+                font: 800 fonts.em(21) fonts.get(bold);
+                text-transform: uppercase;
+            }
+        }
+
+        ul {
+            @include list.structure($offset: 1.7em);
+            @include list.bullet($size: 1em) {
+                color: colors.get(primary);
+            }
+            @include list.circle($size: 0.5em, $color: colors.get(primary));
+        }
+
+        @media all and (max-width: 700px) {
+            &__input {
+                font-size: 0.7em;
+                max-width: 70vw;
+            }
+        }
+
+        @content;
+    }
+
+    @include set;
+    @include single;
+    @include subscription;
+}
+
+@mixin subscription {
+    #{$select} {
+        &--subscription {
+            flex-grow: 1;
+
+            @media all and (min-width: queries.set(700)) {
+                flex-basis: 10em;
+                font-size: fonts.em(22);
+            }
+
+            .form__label {
+                width: 100%;
+            }
+
+            #{$select} {
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin set {
+    @include select.image-defer("/images/products/hairstyle-organizer.png") {
+        max-width: queries.em(340);
+    }
+
+    @include select.image-defer("/images/products/fibers.png") {
+        max-width: queries.em(120);
+    }
+
+    #{$select} {
+        &--set {
+            flex-basis: 100%;
+
+            #{$select} {
+                &__caption {
+                    z-index: 1;
+                    align-self: center;
+                }
+
+                &__product-caption {
+                    align-items: flex-start;
+                }
+
+                &__bonus-caption-group {
+                    display: flex;
+                    justify-content: space-between;
+                    @include group.gutter;
+                }
+
+                &__organizer {
+                    display: flex;
+                    flex-direction: column;
+                    flex-basis: 30em;
+                    position: relative;
+                    .burst {
+                        position: absolute;
+                        top: 5.5em;
+                        right: 0;
+                        z-index: 3;
+                    }
+                }
+
+                &__fibers {
+                    flex-basis: 14em;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin single {
+    @include select.image-defer("/images/14.0000/products/fibers-12g.png") {
+        max-width: queries.em(120);
+    }
+
+    #{$select} {
+        &--single {
+            flex-basis: 100%;
+
+            #{$select} {
+                &__product {
+                    flex-basis: 8em;
+                }
+
+                &__caption {
+                    margin: auto;
+                    flex-basis: 8em;
+                }
+            }
+
+            @content;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+$select: ".durable" !default;
+
+@mixin base {
+    #{$select} {
+        @content;
+    }
+}

@@ -1,0 +1,157 @@
+@use "../../shared/css/template/dtm/utils/scope";
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+
+$select: ".dtm" !default;
+
+@mixin ui {
+    #{$select} {
+        &__in {
+            background: none;
+        }
+    }
+
+    @content;
+}
+
+@mixin layout {
+    .l-outer {
+        max-width: none;
+
+        &__in {
+            max-width: queries.get(desktop);
+            margin: auto;
+        }
+    }
+
+    @content;
+}
+
+@mixin confirmation-table {
+    .c-brand {
+        .c-list {
+            &--horz {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            &__item {
+                flex: 1 1 200px;
+            }
+        }
+    }
+}
+
+@mixin review-table {
+    .reviewTable {
+        &__wrap {
+            padding: 1rem;
+            @media all and (max-width: queries.get(small)) {
+                overflow: scroll;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin form {
+    .c-brand--form {
+        contain: content;
+
+        &,
+        [class*="c-brand"] {
+            font-family: fonts.get(first);
+
+            @media all and (max-width: queries.get(mobile)) {
+                font-size: 1.6rem;
+            }
+        }
+
+        &__fieldset {
+            margin: 0;
+        }
+
+        &__legend {
+            background: colors.get(first);
+            text-align: left;
+        }
+
+        & &__legend > &__headline,
+        & &__fieldset > &__headline {
+            @include fonts.first(1.2em, 1) {
+                font-weight: bold;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin express-checkout {
+    .c-brand--form {
+        .checkout-option {
+            text-align: left;
+            padding: 0 0 1rem;
+            overflow: visible;
+
+            .label {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                min-width: 0;
+            }
+
+            &__img {
+                margin: 0;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin eflex-checkmark {
+    .eflex-checkmark {
+        &__svg {
+            margin: 0;
+        }
+
+        @content;
+    }
+}
+
+@mixin promo {
+  .promo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem;
+    &__field {
+        margin: 0 1em;
+    }
+    @media all and (max-width: queries.get(mobile)) {
+      font-size: 1.2rem;
+      flex-wrap: wrap;
+      &__inline {
+          flex: 1;
+      }
+      &__field {
+          margin: 0 1em 0 0;
+      }
+      &__name {
+          flex: 1 1 100%;
+      }
+    }
+  }
+
+}
+
+@mixin header-btn {
+    .dtm .dtm__in .button--header {
+        padding: 0.75em;
+        font-size: 1em;
+        border: none;
+    }
+}

@@ -1,0 +1,33 @@
+$select: ".social-icons" !default;
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        display: block;
+        max-width: 30em;
+        margin: auto;
+
+        &__group {
+            @include group.contain;
+            @include group.flexchild(1 1 2em);
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        svg {
+            $size: 1.5em;
+
+            fill: currentColor;
+            width: $size;
+            height: $size;
+        }
+
+        @content;
+    }
+}

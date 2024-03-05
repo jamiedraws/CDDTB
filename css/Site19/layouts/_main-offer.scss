@@ -1,0 +1,191 @@
+$select: ".main-offer" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        margin-top: -3rem;
+        padding-top: 3rem;
+
+        background: url("/images/offer-bg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        &__group {
+            @include group.contain;
+            margin-top: 1em;
+        }
+
+        &__price-payment-order {
+            font-size: 0.75em;
+            text-align: center;
+            flex-basis: 22%;
+
+            .payment {
+                font-size: 0.9em;
+            }
+
+            .button {
+                margin-bottom: 1em;
+                width: 100%;
+            }
+        }
+
+        &__price {
+            font-size: 3em;
+        }
+
+        &__products {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            flex-basis: 45%;
+
+            @media only screen and (max-width: 1240px) {
+                flex-basis: auto;
+            }
+
+            figcaption {
+                font-weight: bold;
+            }
+        }
+
+        &__info {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-basis: 20%;
+
+            @media only screen and (max-width: 1128px) {
+                flex-basis: 100%;
+            }
+
+            b {
+                display: block;
+                font-size: 2.5em;
+                font-weight: 700;
+                color: colors.get(primary);
+                font-family: fonts.get(bold);
+                line-height: 1;
+            }
+        }
+
+        &__fibers {
+            text-align: center;
+        }
+
+        &__available {
+            position: absolute;
+            left: 30%;
+            font-family: fonts.get(bold);
+
+            @media only screen and (max-width: 1240px) {
+                left: 35%;
+            }
+
+            &:before {
+                content: url("/images/arrow-left.png");
+                position: absolute;
+                left: -15%;
+                top: 20%;
+
+                @media only screen and (max-width: 300px) {
+                    left: -20%;
+                    top: 5%;
+                }
+            }
+
+            b {
+                display: block;
+            }
+        }
+
+        &__plus {
+            position: absolute;
+            font-size: 3em;
+            bottom: -5%;
+            left: 35%;
+
+            @media only screen and (max-width: 550px) {
+                font-size: 2.5em;
+                left: 32%;
+            }
+        }
+
+        &__value {
+            position: absolute;
+            left: 40%;
+            top: 20%;
+            background: colors.get(accent);
+            color: white;
+            height: 4em;
+            width: 4em;
+            border-radius: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            @media only screen and (max-width: 1240px) {
+                left: 30%;
+            }
+
+            &--price {
+                font-size: 1.25em;
+            }
+
+            &--text {
+                font-size: 0.75em;
+            }
+        }
+
+        &__organizer {
+            align-self: flex-end;
+            z-index: 2;
+            text-align: center;
+            position: relative;
+
+            .burst {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            figcaption b {
+                display: block;
+                color: colors.get(accent);
+                font-size: 1.5em;
+                font-family: fonts.get(bold);
+            }
+        }
+
+        &__shipping {
+            @media only screen and (max-width: 1192px) {
+                margin: 2em 0;
+            }
+        }
+
+        &__mbg {
+            span {
+                color: colors.get(primary);
+                font-size: 1.5em;
+                line-height: 1;
+                font-family: fonts.get(bold);
+            }
+
+            small {
+                display: block;
+                color: #232323;
+            }
+        }
+
+        @content;
+    }
+}

@@ -1,0 +1,56 @@
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+@use "../models/colors";
+
+$select: ".results" !default;
+
+@mixin ui {
+	#{$select} {
+		position: relative;
+
+		@media all and (min-width: queries.get(tablet)) {
+			.section__in {
+				padding-top: 0;
+				padding-bottom: 0;
+			}
+		}
+
+		&__group {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			align-items: center;
+			margin: 0 -2rem;
+			overflow: hidden;
+		}
+
+		&__item {
+			margin: 2rem;
+			flex: 1 350px;
+		}
+
+		@media all and (min-width: queries.get(desktop)) {
+			&__slider {
+				flex: 0 1 645px;
+			}
+		}
+
+		&__copy {
+			flex: 0 1 350px;
+		}
+
+		p {
+			font-size: 1.25em;
+		}
+
+		&__title {
+			font-size: 4em;
+			line-height: 1;
+			font-weight: 900;
+			text-transform: uppercase;
+		}
+
+	}
+
+}

@@ -1,0 +1,48 @@
+@keyframes fingerPress {
+  0%, 100% {
+    transform: scale(0.75);
+  }
+  50% {
+    transform: scale(0.6);
+  }
+}
+.content--easy picture {
+  background: #232323;
+  border-radius: 100%;
+  overflow: hidden;
+  max-width: 15.1875em;
+  margin: auto;
+}
+.content--easy .content__title {
+  text-align: center;
+  margin: 1em 0;
+}
+.content--easy .content__video {
+  max-width: 40em;
+  margin: auto;
+  margin-bottom: 2em;
+}
+.content--easy .content__group {
+  align-items: flex-start;
+}
+.content--easy .content__step {
+  flex-basis: 15em;
+}
+.content--easy .content__step figcaption {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 1em 0 0;
+}
+@media only screen and (max-width: 800px) {
+  .content--easy .content__step figcaption {
+    justify-content: center;
+  }
+}
+.content--easy .content__number {
+  font-style: italic;
+  margin: 0 0.5em 0;
+  font-size: 1.4em;
+}
+
+/*# sourceMappingURL=how-to-use.css.map */

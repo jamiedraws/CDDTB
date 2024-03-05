@@ -1,0 +1,27 @@
+@use "sass:map";
+
+// utils
+@use "../../../Shared/css/template/base/utils/unit-conversion" as convert;
+
+$list: (
+    section-max: convert.to-rem(1400, $media: true),
+    nav-min: convert.to-rem(1240, $media: true),
+    nav-max: convert.to-rem(1239, $media: true),
+    document-mobile-portrait: convert.to-rem(640, $media: true)
+);
+
+@function get($name) {
+    @return map.get($list, $name);
+}
+
+@function set($pixel) {
+    @return convert.to-rem($pixel, $media: true);
+}
+
+@function em($pixel) {
+    @return #{convert.to-em($pixel)};
+}
+
+@function rem($pixel) {
+    @return #{convert.to-rem($pixel)};
+}

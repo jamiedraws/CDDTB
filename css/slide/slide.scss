@@ -1,0 +1,5 @@
+@use "../../Shared/css/slide/1/interfaces/ui-slide";
+@use "../../Shared/css/slide/1/utilities/ui";
+@use "../../shared/css/template/dtm/utils/scope";
+
+@include ui.fade(".carousel");

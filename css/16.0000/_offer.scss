@@ -1,0 +1,160 @@
+$select: ".offer" !default;
+
+@mixin base {
+    #{$select} {
+        background: url("/images/offer-bg.jpg");
+        background-size: cover;
+        &__section {
+            font-family: Termina;
+
+            #hero-order-btn {
+                border: none;
+            }
+
+            &__title {
+                color: #859fb8;
+                letter-spacing: 10px;
+                font-size: 2em;
+                margin-bottom: 1em;
+            }
+
+            &__group {
+                width: 50%;
+                margin-left: auto;
+                padding: 2em;
+
+                .hero__standfirst {
+                    text-align: center;
+                    font-size: 1.5em;
+                }
+
+                p {
+                    line-height: 2;
+                    color: white;
+                }
+
+                .hero__item > * {
+                    margin: 1rem 0;
+                }
+            }
+
+            &__subtitle {
+                text-align: center;
+                font-size: 1.5em;
+            }
+
+            &__offer-group {
+                color: #a190cb;
+                padding-top: 1rem;
+            }
+
+            &--gifts {
+                display: flex;
+                justify-content: space-evenly;
+                position: relative;
+                font-family: Termina;
+
+                &__fibers {
+                    picture {
+                        max-width: 10em;
+                    }
+                }
+
+                &__organizer {
+                    align-self: flex-end;
+                    z-index: 2;
+
+                    picture {
+                        max-width: 24em;
+                    }
+
+                    figcaption {
+                        margin: 0;
+                    }
+                }
+
+                &__organizer--standalone {
+                    font-size: 1.5em;
+                    color: #859fb8;
+                }
+
+                &__available {
+                    position: absolute;
+                    left: 33%;
+
+                    p:first-child {
+                        font-weight: normal;
+                    }
+
+                    p {
+                        font-size: 1.25em;
+                        line-height: 1;
+
+                        img {
+                            display: inline-block;
+                            position: relative;
+                            bottom: -0.25em;
+                            margin-right: 0.5em;
+                        }
+                    }
+                }
+
+                &__value {
+                    position: absolute;
+                    top: 21%;
+                    left: 36%;
+                    background-color: #859fb8;
+                    height: 6em;
+                    width: 6em;
+                    border-radius: 100%;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    p {
+                        font-size: 1em;
+                        color: white;
+                    }
+                }
+            }
+
+            &__price {
+                font-family: Termina;
+            }
+
+            &--details {
+                max-width: 18em;
+                font-family: Termina;
+
+                &__text {
+                    margin: 2em 0;
+
+                    p {
+                        font-weight: normal;
+                    }
+                }
+
+                &__shipping {
+                    font-size: 2.5em;
+                    color: #a190cb;
+                    line-height: 1;
+                }
+
+                &__standfirst {
+                    font-size: 2.5em;
+                    color: #a190cb;
+                }
+
+                &__details {
+                    font-size: 2em;
+                    color: #a190cb;
+                    line-height: 1;
+                    font-weight: normal;
+                }
+            }
+        }
+
+        @content;
+    }
+}

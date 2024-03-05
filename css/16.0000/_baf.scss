@@ -1,0 +1,32 @@
+$select: ".baf" !default;
+
+@mixin base {
+    #{$select} {
+        background: url("/images/baf-bg.jpg");
+        background-size: cover;
+        padding: 2em;
+
+        h2,
+        p {
+            color: white;
+            text-align: center;
+        }
+
+        &__item {
+            max-width: 50%;
+            justify-content: center;
+
+            img {
+                max-width: 15em;
+                border-radius: 100%;
+                position: relative;
+                border: 5px solid #63558a;
+            }
+        }
+
+        &__after {
+            left: -3em;
+        }
+        @content;
+    }
+}

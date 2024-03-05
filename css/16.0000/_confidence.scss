@@ -1,0 +1,26 @@
+$select: ".confidence" !default;
+
+@mixin base {
+    #{$select} {
+        background: url("/images/confidence-bg.png");
+        background-size: cover;
+
+        &__div {
+            display: flex;
+        }
+
+        &__text {
+            text-align: left;
+            padding: 1em;
+        }
+
+        &__title,
+        p span {
+            font-family: IvyPresto Headline;
+            color: #859fb8;
+            font-size: 3em;
+            margin-bottom: 0.5em;
+        }
+        @content;
+    }
+}

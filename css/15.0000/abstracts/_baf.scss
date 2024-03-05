@@ -1,0 +1,49 @@
+$select: ".baf" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+@mixin base {
+    #{$select} {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        figure {
+            max-width: 54%;
+        }
+
+        picture {
+            max-width: 20em;
+            border-radius: 100%;
+            position: relative;
+            border: 5px solid colors.get(primary-dark);
+            background: colors.get(shade);
+        }
+
+        figcaption {
+            text-transform: uppercase;
+            margin-top: 0.5em;
+        }
+
+        &__before {
+            figcaption {
+                font: fonts.em(22) fonts.get(base);
+            }
+        }
+
+        &__after {
+            margin-left: -3em;
+            z-index: 1;
+
+            figcaption {
+                font: 800 fonts.em(24) fonts.get(bold);
+            }
+        }
+
+        @content;
+    }
+}

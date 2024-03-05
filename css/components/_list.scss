@@ -1,0 +1,47 @@
+@use "../models/queries";
+
+$select: ".list" !default;
+
+@mixin ui {
+	#{$select} {
+		$gap: 2em;
+
+
+		list-style: none;
+		margin: 0 -#{$gap};
+		overflow: hidden;
+
+		@media all and (max-width: queries.get(desktop)) {
+			column-width: 20em;
+			column-rule: 1px solid;
+		}
+
+		li {
+			break-inside: avoid;
+			margin: 0 #{$gap};
+		}
+
+		@media all and (min-width: queries.get(desktop)) {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			li {
+				margin: 0 0 1em;
+				padding: 0 #{$gap};
+				display: inline-block;
+				border-right: 1px solid white;
+				&:last-child {
+					border-right: none;
+				}
+			}
+		}
+
+		&--stack {
+			li {
+				flex: 0 1 100%;
+				margin: 0.3em 0;
+			}
+		}
+
+	}
+}

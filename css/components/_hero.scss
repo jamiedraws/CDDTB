@@ -1,0 +1,369 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../models/queries";
+@use "../models/colors";
+@use "../models/fonts";
+
+$select: ".hero" !default;
+
+@mixin ui {
+    $breakpoint: 930px;
+    $gap: 2rem;
+
+    @include arp.apply("#{$select}__headshot", math.div(535, 768), 266px);
+
+    .headshot {
+        margin: 0.33em;
+        img {
+            outline: 4px solid white;
+            outline-offset: -4px;
+        }
+        figcaption {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            margin: 0.6em;
+            color: white;
+            @include fonts.first(1.2em, 1) {
+                font-style: italic;
+                text-transform: uppercase;
+            }
+        }
+        img[src*="after"] + figcaption {
+            font-weight: bold;
+        }
+    }
+
+    .badge {
+        outline: 2px solid #e0c863;
+        border: 2px solid white;
+        background: linear-gradient(to bottom, #efe8b7, #e1ca67);
+        font-weight: bold;
+        font-size: 2.5em;
+        padding: 0.35em;
+        margin: 0.5em;
+        text-align: center;
+        color: colors.get(first);
+        text-shadow: 0 1px 1px white;
+        line-height: 1;
+        span {
+            display: block;
+            font-weight: 800;
+            font-size: 1.25em;
+        }
+    }
+
+    #{$select} {
+        margin: 0;
+        padding: 1rem 0;
+
+        &--arrow &__in::after {
+            display: none;
+        }
+
+        &--show-overflow,
+        &--show-overflow *,
+        &--show-overflow #{$select}__in #{$select}__group {
+            overflow: visible;
+        }
+
+        &__group--models {
+            > * {
+                flex: 1;
+            }
+            @media all and (max-width: queries.get(mobile)) {
+                #{$select}__item {
+                    flex: 1 1000%;
+                }
+
+                #{$select}__img-wrapper #{$select}__models--before {
+                    max-width: 70%;
+                    margin-left: 1em;
+                }
+
+                #{$select}__text-big {
+                    margin: 6rem 0 2rem;
+                    font-size: 0.6em;
+                    padding: 1em;
+                }
+
+                #{$select}__text-big h3 {
+                    max-width: none;
+                }
+            }
+        }
+
+        &__text-big {
+            text-align: center;
+        }
+
+        @include arp.apply("#{$select}__models--after", math.div(674, 446)) {
+            position: relative;
+            z-index: 0;
+        }
+
+        &__img-wrapper {
+            position: relative;
+            & #{$select}__models--before {
+                position: absolute;
+                bottom: -3em;
+                left: 0;
+            }
+        }
+
+        &__text-big {
+            h2 {
+                font-size: 3.4em;
+                line-height: 1;
+            }
+
+            h3 {
+                margin: 0.6em auto 1em;
+                line-height: 1.2;
+                max-width: 11em;
+                font-weight: 500;
+                font-size: 2em;
+            }
+        }
+
+        @supports (clip-path: polygon(100% 0, 0 0, 50% 100%)) {
+            &--arrow {
+                overflow: visible;
+            }
+
+            &--arrow &__in::after {
+                content: "";
+                display: block;
+                width: 13em;
+                height: 2.3em;
+                position: absolute;
+                bottom: -2.9em;
+                left: 0;
+                background: url(/images/bkg.jpg) left top repeat;
+                clip-path: polygon(100% 0, 0 0, 50% 100%);
+            }
+        }
+
+        @media all and (min-width: 1000px) {
+            &--arrow &__in::after {
+                margin: 0 0 0 7.4em;
+            }
+        }
+
+        @media all and (min-width: $breakpoint) and (max-width: 1000px) {
+            &--arrow &__in::after {
+                display: none;
+            }
+        }
+
+        @media all and (max-width: $breakpoint) {
+            &--arrow &__in::after {
+                right: 0;
+                margin: 0 auto;
+            }
+        }
+
+        &__in {
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        &__group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            margin: 0 -#{$gap};
+            overflow: hidden;
+        }
+
+        &__title {
+            text-transform: uppercase;
+            font-size: 2.7em;
+            font-weight: 800;
+            line-height: 1;
+            word-break: break-word;
+            align-self: center;
+            &--alt {
+                font-weight: 700;
+                text-align: left;
+            }
+        }
+
+        &__header {
+            color: colors.get(second);
+            order: -1;
+            text-align: center;
+            padding: 0.6em;
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 800;
+            @media all and (min-width: queries.get(nav)) {
+                // this is just to show the title in the header for mobile only
+                display: none;
+            }
+            @media all and (max-width: queries.get(mobile)) {
+                font-size: 1.6em;
+                border-bottom: 3px solid colors.get(second);
+            }
+        }
+
+        &__subtitle {
+            font-style: italic;
+            font-weight: 500;
+            font-size: 2em;
+            &--alt {
+                text-align: left;
+                color: black;
+                font-size: 2em;
+                text-align: left;
+                margin: 0;
+                font-style: italic;
+                font-weight: 500;
+            }
+        }
+
+        &__title,
+        &__subtitle {
+            flex: 1 100%;
+        }
+
+        &__offer-group {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding-top: 3rem;
+        }
+
+        &__offer {
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex: 0 1 390px;
+            font-size: 1rem;
+
+            .deal {
+                flex: 1 1 100%;
+            }
+        }
+
+        &__offer-title {
+            width: 100%;
+            text-align: left;
+            padding-left: 0.5em;
+            text-transform: uppercase;
+            color: #343535;
+            margin-top: 0;
+            &::before {
+                display: none;
+            }
+        }
+
+        &__mbg--large {
+            flex: 0 1 133px;
+        }
+
+        &__mbg--small {
+            display: none;
+        }
+
+        @include arp.apply("mbg", math.div(1, 1), 133px);
+
+        &__shipping {
+            margin: 1rem 0;
+            text-transform: uppercase;
+            @include fonts.first(3em);
+            font-weight: 800;
+            flex: 1 1 100%;
+            &--alt {
+                flex: 1;
+                margin-top: 0.5em;
+            }
+
+            > span {
+                font-size: 0.83em;
+                font-weight: 500;
+                display: block;
+            }
+        }
+
+        &__product {
+            &-advertise {
+                flex: 1 1 400px;
+                display: flex;
+                flex-wrap: wrap;
+                position: relative;
+                z-index: 2;
+                align-items: center;
+                margin: #{$gap};
+            }
+
+            &-image {
+                flex: 1 346px;
+            }
+        }
+
+        &__img-group {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        @media all and (max-width: $breakpoint) {
+            &__product-advertise {
+                text-align: center;
+                margin: 1rem;
+                font-size: 0.6em;
+            }
+
+            &__title {
+                font-size: calc(1.5em + 3vw);
+                font-size: clamp(1.5em, 7vw, 3.75em);
+            }
+
+            &__subtitle {
+                font-size: calc(1em + 3vw);
+                font-size: clamp(1em, 7vw, 3em);
+            }
+
+            &__offer {
+                flex: 1 1 auto;
+            }
+
+            &__mbg--large {
+                display: none;
+            }
+
+            &__mbg--small {
+                width: 9.6em;
+                margin: 0.8em;
+                display: block;
+            }
+
+            &__product {
+                &-image {
+                    max-width: 80vw;
+                    max-width: clamp(9em, 80vw, 430px);
+                    order: -1;
+                }
+
+                &-advertise {
+                    justify-content: center;
+                }
+            }
+        }
+
+        @media all and (max-width: queries.get(mobile)) {
+            .button,
+            .full-cc {
+                flex-basis: 20em;
+            }
+        }
+
+        @content;
+    }
+}

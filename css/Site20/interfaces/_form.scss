@@ -1,0 +1,116 @@
+@use "sass:map";
+
+// config
+@use "../config/colors";
+
+// interfaces
+@use "dtm";
+
+// layouts
+@use "../layouts/form";
+@use "../layouts/content";
+
+// components
+@use "../../../Shared/css/template/shoppingcart/components/icons";
+@use "./../components/validate";
+@use "../../../Shared/css/template/shoppingcart/components/validation-summary-errors"
+    as vse;
+@use "../../../Shared/css/template/dtm/components/payment-icons";
+@use "../../../Shared/css/template/shoppingcart/components/divider-line";
+@use "../../../Shared/css/template/shoppingcart/components/dropdown";
+
+@use "../components/button";
+@use "../components/braintree";
+@use "../components/order-table";
+@use "../components/burst";
+@use "../components/corner-callout";
+@use "../components/option";
+@use "../components/status-screen";
+
+// utils
+@use "../../../Shared/css/template/dtm/utils/scope";
+
+// abstracts
+@use "../abstracts/offer-details";
+@use "../abstracts/offer-group";
+@use "../abstracts/callout";
+
+@mixin checkout {
+    @include dtm.base;
+    @include dtm.express-checkout;
+
+    @include form.base;
+    @include form.field-button;
+
+    @include scope.for-template {
+        @include braintree.base;
+        @include braintree.alias;
+    }
+
+    @include callout.base;
+
+    @include status-screen.initialize;
+    @include status-screen.inline;
+
+    @include order-table.new;
+    @include order-table.item-grid {
+        tbody {
+            td {
+                &:first-child {
+                    @include order-table.span-item-grid-row;
+                }
+
+                &:not(:first-child) {
+                    @include order-table.flex-item-grid-row;
+                }
+            }
+        }
+    }
+
+    @include icons.combobox;
+
+    @include validate.base {
+        &__group {
+            order: 1;
+        }
+    }
+    @include validate.promo-code;
+
+    .requiredIcon {
+        color: map.get(validate.$colors, invalid);
+        margin-right: 0.25em;
+    }
+
+    @include vse.new {
+        color: map.get(validate.$colors, invalid);
+
+        margin-top: 1em;
+    }
+
+    @include payment-icons.new;
+    @include payment-icons.form;
+
+    @include offer-details.base;
+
+    @include offer-group.base;
+    @include option.base;
+
+    @include burst.option;
+    @include burst.value;
+    @include burst.tv;
+    @include burst.text-wrap;
+
+    @include corner-callout.base;
+    // these are adjustments for using the corner-callout
+    .offer-group__group > * {
+        margin: 0;
+    }
+    .option--set {
+        overflow: hidden;
+        position: relative;
+    }
+
+    @include content.mbg;
+
+    @content;
+}

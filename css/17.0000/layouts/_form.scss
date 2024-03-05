@@ -1,0 +1,224 @@
+$select: ".form" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// layouts
+@use "../../../Shared/css/template/base/layouts/form";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/copy";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+@mixin base {
+    @include form.new;
+    @include promo;
+    @include form.fieldset;
+    @include form.field-label;
+    @include form.select;
+    @include form.checkbox(
+        $size: 1.25rem,
+        $border-radius: 100%,
+        $icon-color: white,
+        $background-color: #7ac142
+    ) {
+        &__checkbox {
+            border-color: #267706;
+            border-width: 0.1rem;
+            background-color: #eef0ed;
+            font-size: 0.75rem;
+        }
+    }
+
+    #{$select} {
+        z-index: 1;
+
+        &__title {
+            flex: 1 1 100%;
+            font-size: 1em;
+            font-weight: normal;
+            text-align: left;
+
+            padding: 1em;
+
+            @include background.color-map(
+                colors.get(shade),
+                colors.get(base-light)
+            );
+        }
+
+        &__group {
+            @include group.contain;
+            @include group.flexchild(1 1 13em);
+        }
+
+        &__payment-icons {
+            justify-content: flex-start;
+
+            > img {
+                max-width: 37px;
+            }
+        }
+
+        &__message {
+            text-align: center;
+        }
+
+        &__group-section {
+            @include group.contain(1em);
+            @include group.flexchild(1 1 23em);
+        }
+
+        &__group,
+        &__group-section {
+            overflow: visible;
+        }
+
+        &__span-item {
+            flex: 1 1 100%;
+        }
+
+        &__fieldset {
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__item-input-label {
+            flex: 0 1 auto;
+        }
+
+        &__field-label {
+            font-size: 1em;
+        }
+
+        &__field-label label,
+        &__field {
+            font-size: inherit;
+        }
+
+        &__field {
+            padding: 0.75em;
+        }
+
+        &__cvv {
+            align-items: center;
+        }
+
+        &__cvv &__field {
+            flex-basis: 15rem;
+        }
+
+        &__cvv &__link {
+            font-size: 1em;
+        }
+
+        &__copy {
+            @include copy.separate;
+        }
+
+        &__action {
+            margin-top: 2rem;
+        }
+
+        &__action-text {
+            text-align: center;
+        }
+
+        &__info-accordion {
+            > :first-child {
+                margin-bottom: 2rem;
+            }
+        }
+
+        label[for="zc"] {
+            @include group.contain;
+            align-items: center;
+        }
+
+        @content;
+    }
+
+    @include checkbox-label-stack;
+
+    // @media all and (min-width: queries.set(700)) {
+    @include frame;
+    // }
+}
+
+@mixin frame {
+    #{$select} {
+        &--frame {
+            outline: 1px solid;
+
+            #{$select} {
+                &__fieldset {
+                    @include group.gutter(0);
+                }
+
+                &__frame {
+                    padding: 1rem;
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin checkbox-label-stack {
+    #{$select} {
+        &--checkbox-label-stack {
+            #{$select} {
+                &__checkbox-label {
+                    flex-direction: column;
+                    align-items: center;
+                    @include copy.separate;
+                }
+
+                &__checkbox {
+                    margin-left: 1rem;
+                }
+
+                &__label {
+                }
+            }
+
+            @content;
+        }
+    }
+}
+
+@mixin promo {
+    .promo {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .promo__block {
+        flex: 1 1 100%;
+    }
+
+    .promo__inline {
+        flex: 0 1 auto;
+        margin: 0.5em;
+    }
+
+    .dtm__in--mv .promo__name {
+        flex-basis: 100%;
+    }
+
+    .dtm__in--mv .promo__field {
+        flex: 1;
+    }
+
+    .dtm .promo .button {
+        font-size: 1em;
+    }
+}

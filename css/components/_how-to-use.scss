@@ -1,0 +1,83 @@
+@use "sass:math";
+
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+@use "../models/colors";
+@use "../models/fonts";
+
+$select: ".easy" !default;
+
+@mixin ui {
+    #{$select} {
+        //@include fonts.first(1em, 1);
+        font-size: 2rem;
+        margin: 3rem 0;
+
+        iframe {
+            margin: 0 auto;
+        }
+
+        &__title {
+            text-transform: uppercase;
+            font-style: italic;
+            text-align: center;
+            font-weight: bold;
+            font-size: 2em;
+        }
+
+        &__group {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        @include arp.apply("&__img", math.div(1, 1), 294px) {
+            margin: 0.5em;
+        }
+
+        &__step {
+            flex: 0 1 25%;
+            margin: 0;
+            padding: 0.25em;
+            figure {
+                margin: 0.25em;
+            }
+            figcaption {
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-start;
+                margin: 1em 0 0;
+                #{$select}__number {
+                    font-style: italic;
+                    margin: 0 0.5em 0;
+                    font-size: 1.4em;
+                }
+                span {
+                    margin: 0;
+                }
+            }
+        }
+
+        @media all and (max-width: queries.get(tablet)) {
+            &__step {
+                flex-basis: 50%;
+            }
+        }
+
+        @media all and (max-width: queries.get(mobile)) {
+            &__title {
+                font-size: 1.6em;
+            }
+            &__step {
+                flex-basis: 100%;
+            }
+            &__img {
+                margin: 0 auto;
+            }
+        }
+
+        @content;
+    }
+}

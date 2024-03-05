@@ -1,0 +1,67 @@
+@use "../models/colors";
+@use "../models/fonts";
+@use "../models/queries";
+
+$select: ".view" !default;
+
+@mixin offset($position: 6rem, $negative: true) {
+	$position: 6rem;
+
+	@if $negative {
+		$position: -#{$position};
+	}
+
+	top: $position;
+
+	@content;
+}
+
+@mixin update-offset($negative: true) {
+	@include offset(6rem, $negative);
+
+	@media all and (max-width: queries.get(nav)) {
+		@include offset(6.7rem, $negative);
+	}
+
+	@content;
+}
+
+@mixin ui {
+	#{$select} {
+		&:not(.nav) {
+			position: relative;
+			z-index: 1;
+		}
+
+		&__anchor {
+			@include update-offset {
+				position: absolute;
+			}
+		}
+
+		&__scroll {
+			@include update-offset(false) {
+				position: sticky;
+			}
+		}
+
+		&__in {
+			max-width: queries.get(desktop);
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		@content;
+	}
+}
+
+@mixin nav-is-hidden {
+	#{$select} {
+		&--remove-nav &__anchor {
+			top: 0;
+		}
+
+		@content;
+	}
+}

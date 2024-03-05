@@ -1,0 +1,14 @@
+@use "sass:map";
+
+$list: (
+	desktop: 1200px,
+	nav: 1200px,
+	tablet: 900px,
+	mobile: 600px,
+	small: 320px,
+	mini: 240px
+);
+
+@function get($name) {
+	@return map.get($list, $name);
+}

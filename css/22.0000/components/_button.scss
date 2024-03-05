@@ -1,0 +1,46 @@
+$select: ".button" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// components
+@use "../../../Shared/css/template/base/components/button";
+
+// utils
+@use "../../../Shared/css/template/dtm/utils/scope";
+
+@mixin base {
+    @include scope.for-template {
+        @include button.new(colors.get(accent), colors.get(base-light)) {
+            font: 800 fonts.rem(21) fonts.get(bold);
+            text-transform: uppercase;
+            text-decoration: none;
+
+            border-radius: 0.25em;
+            padding: 0.75em;
+
+            &--can-scale {
+                font-size: 1em;
+            }
+
+            &--accent {
+                @include button.color-map(
+                    colors.get(accent),
+                    colors.get(base-light)
+                );
+            }
+
+            @media all and (max-width: queries.set(1000)) {
+                &:not(&--can-scale) {
+                    font-size: fonts.rem(16);
+                }
+            }
+        }
+    }
+
+    #{$select} {
+        @content;
+    }
+}

@@ -1,0 +1,66 @@
+@use "../components/list";
+
+$select: ".footer" !default;
+
+@mixin ui {
+	#{$select} {
+		$breakpoint: 780px;
+
+		text-align: center;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+
+		&__group {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			text-align: left;
+			margin: 1em -1em;
+
+			> * {
+				margin: 1em 0;
+				flex: 1 1 100%;
+			}
+
+			@media all and (max-width: $breakpoint) {
+				> nav,
+				> address {
+					flex-grow: 1;
+				}
+			}
+		}
+
+		&__group > &__divide {
+			flex: 0 0 1px;
+			align-self: stretch;
+
+			@media all and (max-width: $breakpoint) {
+				height: 1px;
+				flex: 1 1 100%;
+			}
+		}
+
+		&__divide {
+			background: currentColor;
+		}
+
+		nav {
+			a:not(:hover):not(:focus) {
+				text-decoration: none;
+			}
+		}
+
+		&__disclaimer {
+			border: 1px solid currentColor;
+			padding: 2em;
+			text-align: left;
+		}
+
+		&__copyright {
+			text-align: center;
+		}
+	}
+
+	@include list.ui;
+}

@@ -1,0 +1,57 @@
+@use "sass:map";
+
+$select: ".font" !default;
+
+// abstracts
+@use "../../../Shared/css/template/base/utils/unit-conversion";
+
+$list: (
+    base: (
+        archia,
+        Helvetica,
+        sans-serif
+    ),
+    light: (
+        ivypresto-headline,
+        "Times New Roman",
+        serif
+    ),
+    bold: (
+        termina,
+        impact,
+        sans-serif
+    )
+);
+
+@function get($name) {
+    @return map.get($list, $name);
+}
+
+@function em($pixel) {
+    @return #{unit-conversion.to-em($pixel)};
+}
+
+@function rem($pixel) {
+    @return #{unit-conversion.to-rem($pixel)};
+}
+
+@mixin selectors {
+    #{$select} {
+        @each $name, $font in $list {
+            &-#{$name} {
+                font-family: $font;
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin request {
+    @font-face {
+        font-family: archia;
+        font-display: swap;
+        src: url(/fonts/archia-regular-webfont.woff2) format("woff2"),
+            url(/fonts/archia-regular-webfont.woff) format("woff");
+    }
+}

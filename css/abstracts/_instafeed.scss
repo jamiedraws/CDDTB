@@ -1,0 +1,14 @@
+@use "sass:math";
+
+$select: ".instafeed" !default;
+
+// utils
+@use "../../Shared/css/template/dtm/utils/arp";
+
+@mixin base {
+    @include arp.apply(".instafeed__placeholder", math.div(320, 320), 320px);
+
+    #{$select} {
+        @content;
+    }
+}

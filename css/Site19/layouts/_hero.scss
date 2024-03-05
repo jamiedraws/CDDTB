@@ -1,0 +1,87 @@
+@use "sass:math";
+
+$select: ".hero" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+@use "../../../Shared/css/template/base/abstracts/position";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+@mixin base {
+    #{$select} {
+        overflow: hidden;
+
+        @include background.color-map(
+            colors.get(shade),
+            colors.get(base-light)
+        );
+
+        &__in {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            max-width: fonts.em(1200);
+            padding: 2em;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        &__text {
+            font-family: fonts.get(light);
+            font-size: 1.3em;
+            margin: 1em 0;
+        }
+
+        &__standfirst {
+            font: 500 0.9em fonts.get(bold);
+            text-transform: uppercase;
+        }
+
+        &__title {
+            color: colors.get(primary-light);
+            font: 800 1.5em/1.2 fonts.get(bold);
+            text-transform: uppercase;
+            margin: 1.25em 0 0.25em;
+        }
+
+        &__background {
+            background: url(/images/hero-banner.jpg) no-repeat left top;
+            background-size: contain;
+
+            @include contain.format;
+            @include contain.ratio(math.div(425, 146));
+        }
+
+        @media all and (min-width: queries.set(1100)) {
+            font-size: 1.05vw;
+
+            &__background {
+                @include position.center-absolute;
+            }
+
+            &__text {
+                flex: 0 1 24em;
+            }
+        }
+
+        @media all and (max-width: queries.set(560)) {
+            &__text {
+                font-size: 3.5vw;
+            }
+        }
+
+        @content;
+    }
+}

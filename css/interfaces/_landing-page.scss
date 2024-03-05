@@ -1,0 +1,57 @@
+@use "../interfaces/page";
+@use "../interfaces/toast";
+
+@use "../layouts/copy";
+@use "../layouts/form";
+
+@use "../components/button";
+@use "../components/shade";
+@use "../components/advertise";
+@use "../components/options";
+@use "../components/how-to-use";
+@use "../components/banner";
+
+@use "../abstracts/instafeed";
+
+@use "../templates/dtm";
+
+@use "../themes/present";
+
+@use "../media/iframes";
+
+@use "../../Shared/css/klarna/placement" as klarna;
+
+@mixin ui {
+    @include page.ui;
+    @include page.view;
+    @include page.section;
+    @include page.offer;
+    @include page.deal;
+
+    @include how-to-use.ui;
+    @include shade.ui;
+
+    @include copy.ui;
+
+    @include advertise.ui;
+    @include form.template;
+    @include form.ui;
+    @include form.defer;
+    @include form.card;
+    @include options.ui;
+    @include klarna.express-checkout;
+
+    @include button.ui;
+    @include banner.ui;
+
+    @include present.ui;
+    @include present.colors;
+
+    @include dtm.promo;
+
+    @include toast.ui;
+    @include toast.promote;
+
+    @include instafeed.base;
+    @include iframes.base;
+}

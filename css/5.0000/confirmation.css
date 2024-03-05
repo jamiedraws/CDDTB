@@ -1,0 +1,46 @@
+.dtm__in .l-outer {
+  max-width: none;
+}
+.dtm__in .l-outer__in {
+  max-width: 1200px;
+  margin: auto;
+}
+.dtm__in .c-brand .c-list--horz {
+  display: flex;
+  flex-wrap: wrap;
+}
+.dtm__in .c-brand .c-list__item {
+  flex: 1 1 200px;
+}
+
+.dtm__in .l-outer__in {
+  max-width: 900px;
+  margin: auto;
+}
+
+.dtm .c-banner,
+.dtm .c-banner__item {
+  padding: 0;
+}
+
+.dtm .c-banner {
+  border: none;
+  background: none;
+}
+
+.header .view__in {
+  padding: 1em;
+}
+
+#content_top {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border: none;
+}
+
+.header__tagline {
+  margin: 0.5em;
+}
+
+/*# sourceMappingURL=confirmation.css.map */

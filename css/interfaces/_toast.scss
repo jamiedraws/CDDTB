@@ -1,0 +1,64 @@
+@use "../components/toast";
+@use "../components/close";
+
+$select: ".toast" !default;
+
+@mixin ui {
+	@include close.model(".toast");
+
+	#{$select} {
+		@include toast.model;
+		margin: 1rem;
+
+		&--hidden {
+			@include toast.hidden;
+
+			#{$select}__close {
+				&::before {
+					transition-delay: 0.35s;
+				}
+
+				&::after {
+					transition-delay: 0.7s;
+				}
+			}
+		}
+
+		&--alert {
+			position: fixed;
+			z-index: 5;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			transition-delay: 1s;
+		}
+
+		&__text {
+			margin-right: 1em;
+		}
+
+		&__close {
+			font-size: 0.45em;
+
+			&::before {
+				transition-delay: 1.35s;
+			}
+
+			&::after {
+				transition-delay: 1.7s;
+			}
+		}
+
+		@content;
+	}
+}
+
+@mixin promote {
+	#{$select} {
+		&--promote &__button {
+			font-size: 1em;
+		}
+
+		@content;
+	}
+}

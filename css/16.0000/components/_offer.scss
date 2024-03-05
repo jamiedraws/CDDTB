@@ -1,0 +1,66 @@
+$select: ".offer" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+// components
+@use "../../../Shared/css/template/base/components/offer";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    @include offer.base;
+
+    #{$select} {
+        color: colors.get(primary);
+        font-family: fonts.get(bold);
+
+        &__group {
+            font-style: normal;
+            margin: 0;
+        }
+
+        &__follow {
+            font-size: 1.25em;
+            top: -0.1em;
+        }
+
+        &__amt {
+            font-size: 2.5em;
+            line-height: 0.8;
+        }
+
+        &__standfirst {
+            color: black;
+            font-size: 0.5em;
+        }
+
+        @content;
+    }
+
+    @include price-callout;
+}
+
+@mixin price-callout {
+    #{$select} {
+        &--price-callout {
+            font-size: 0.9em;
+            @include group.gutter(0.5em);
+
+            #{$select} {
+                &__price {
+                    font-size: 1em;
+                    margin: 0;
+                }
+
+                &__callout {
+                    font-size: 0.4em;
+                }
+            }
+
+            @content;
+        }
+    }
+}

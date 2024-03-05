@@ -1,0 +1,42 @@
+$select: ".shades" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    #{$select} {
+        font-size: 0.85em;
+
+        &__group {
+            @include group.contain;
+            justify-content: center;
+            @include group.flexchild(0 1 10em);
+        }
+
+        picture {
+            max-width: 10em;
+            border-radius: 100%;
+            overflow: hidden;
+            background: colors.get(shade-light);
+        }
+
+        img {
+            pointer-events: none;
+        }
+
+        &__picture-checkbox {
+            flex-basis: 8em;
+            display: inline-block;
+        }
+
+        &--radiogroup {
+            // font-size: 0.8em;
+        }
+
+        @content;
+    }
+}

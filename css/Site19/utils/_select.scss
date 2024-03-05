@@ -1,0 +1,5 @@
+@mixin image-defer($file-name) {
+    [data-src-img$="#{$file-name}"] {
+        @content;
+    }
+}

@@ -1,0 +1,202 @@
+@use "../models/fonts";
+@use "../models/queries";
+
+$select: ".offer" !default;
+
+@mixin ui {
+    $breakpoint: 930px;
+
+    #{$select} {
+        display: flex;
+        @include fonts.first(1em, 1);
+        font-weight: bold;
+        position: relative;
+
+        &__txt {
+            text-transform: capitalize;
+            font-size: 1.8em;
+        }
+
+        &__group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &--reset {
+                font-size: 1rem;
+            }
+        }
+
+        @media all and (max-width: $breakpoint) {
+            &__group {
+                flex-direction: row-reverse;
+            }
+        }
+
+        @media all and (max-width: queries.get(mobile)) {
+            &--product {
+                font-size: 2.2vw;
+                margin: 0 auto 0 0;
+            }
+            &--has-more {
+                font-size: 1.8vw;
+                margin: 0;
+                [class*=mbg] {
+                    max-width: 8rem;
+                }
+            }
+        }
+
+        &__price {
+            font-weight: 800;
+            font-size: 4.5em;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            margin-top: -0.15em;
+            position: relative;
+        }
+
+        &__price--crossout {
+            opacity: 0.3;
+            font-size: 2em;
+            margin: 0.1em 0.7em;
+            &::after {
+                content: "";
+                background: #ff0400;
+                width: 5.9em;
+                height: 0.2em;
+                position: absolute;
+                transform: rotate(-15.9deg);
+                left: -0.5em;
+                top: 0.8em;
+            }
+        }
+
+        &__disclaimer {
+            line-height: 1;
+            text-align: left;
+            display: block;
+            font-size: 0.35em;
+        }
+
+        &__follow {
+            text-align: left;
+            position: relative;
+            top: 0.2em;
+            left: 0.1em;
+        }
+
+        &__amt {
+            font-size: 2em;
+        }
+
+        &__currency,
+        &__cent {
+            font-size: inherit;
+        }
+
+        &__currency {
+            line-height: 1.4;
+        }
+
+        &__cent {
+            line-height: 1;
+            text-transform: none;
+
+            > small {
+                display: inline-block;
+                margin-left: -0.25em;
+            }
+        }
+
+
+        &--has-more {
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-end;
+
+            & #{$select}__price--crossout {
+                align-self: flex-start;
+                margin-top: 1.2em;
+            }
+
+            & [class*=mbg] {
+                flex: 1 100px;
+                max-width: 100px;
+            }
+
+            > * {
+                margin: 0 0.25em 0.25em;
+            }
+
+           & #{$select}__price--crossout::after {
+                top: 1.4em;
+            }
+
+           @media all and (max-width: queries.get(mobile)) {
+                align-items: center;
+
+                > * {
+                    margin: 0.25em;
+                }
+           }
+        }
+    }
+}
+
+@mixin strike-through {
+    #{$select} {
+        &__strike-through {
+            display: inline-block;
+            position: absolute;
+            top: -0.5em;
+            left: -0.5em;
+            color: #a6a6a6;
+            font-size: 1.5em;
+
+            &::after {
+                content: "";
+                position: absolute;
+                width: 200%;
+                height: 0.075em;
+                background: #333;
+                top: 0;
+                bottom: 0;
+                left: -50%;
+                right: 0;
+                transform-origin: center center;
+                transform: rotate(-30deg);
+                margin: auto;
+            }
+        }
+    }
+}
+
+
+@mixin payment-icons {
+    .payment {
+        width: 10em;
+    }
+
+    .payment__group {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin: 0 1rem;
+    }
+
+    .full-cc .payment {
+        width: 100%;
+        padding: 1rem 0;
+        margin: 0 auto;
+        &__group {
+            flex-wrap: nowrap;
+        }
+    }
+
+    .payment__group div {
+        flex: 1 2.5em;
+        margin: 0.2em;
+    }
+}

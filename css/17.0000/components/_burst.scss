@@ -1,0 +1,135 @@
+$select: ".burst" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+
+// components
+@use "../../../Shared/css/template/shoppingcart/components/burst";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/group";
+
+@mixin base {
+    @include burst.new;
+
+    #{$select} {
+        font-size: 1em;
+        background: colors.get(base);
+        border-color: colors.get(base);
+
+        @content;
+    }
+
+    @include price;
+}
+
+@mixin price {
+    #{$select} {
+        &--price {
+            font-size: 2.5em;
+            background: colors.get(primary);
+            border-color: colors.get(primary);
+
+            @content;
+        }
+    }
+}
+
+@mixin option {
+    #{$select} {
+        &--option {
+            font: 800 fonts.em(23) fonts.get(bold);
+            background: colors.get(primary);
+            border-color: colors.get(primary);
+        }
+    }
+}
+
+@mixin value {
+    #{$select} {
+        &--value {
+            font-size: 0.8em;
+            font-size: clamp(12px, 0.8em, 30px);
+            background: colors.get(accent);
+            border: none;
+            width: 4em;
+            max-width: 4em;
+            height: 4em;
+            text-align: center;
+            line-height: 1;
+            display: inline-block;
+            align-self: center;
+            padding-top: 1em;
+            > * {
+                display: block;
+            }
+        }
+    }
+}
+
+@mixin tv {
+    #{$select} {
+        &--tv {
+            display: block;
+            width: 6em;
+            max-width: 6em;
+            height: 6em;
+            text-align: center;
+            font-size: 0.8em;
+            padding-top: 1.5em;
+            background: colors.get(primary);
+            border: none;
+            > * {
+                display: block;
+                width: 100%;
+                height: 1em;
+            }
+            span {
+                font-size: 2.7em;
+                line-height: 1;
+                margin: -0.2em 0 0.05em;
+            }
+        }
+    }
+}
+
+@mixin text-wrap {
+    #{$select} {
+        &--text-wrap {
+
+        }
+        &__wrap {
+            position: absolute;
+            width: 2.9em;
+            height: 3.4em;
+            border-radius: 50%;
+            transform: rotate(-65deg);
+            margin: 0;
+            display: block;
+            left: -2%;
+            top: -18%;
+            color: black;
+        }
+        & &__text-wrap {
+            font-size: 1em;
+            > * {
+                font-size: 0.9em;
+                display: block;
+                height: 4.4em;
+                position: absolute;
+                width: 0.6em;
+                left: 0;
+                right: 0;
+                top: 0;
+                transform-origin: bottom center;
+                margin: 0;
+            }
+        }
+        @for $i from 1 through 100 {
+            .char#{$i} {
+                transform: rotate(($i*12)+deg);
+            }
+        }
+    }
+}

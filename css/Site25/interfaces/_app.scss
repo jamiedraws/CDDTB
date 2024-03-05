@@ -1,0 +1,53 @@
+@use "sass:math";
+
+// layouts
+@use "../layouts/document";
+@use "../layouts/header";
+@use "../layouts/nav";
+@use "../layouts/content";
+@use "../layouts/footer";
+
+// components
+@use "../components/button";
+@use "../components/burst";
+@use "../../../Shared/css/template/base/components/skip-link";
+@use "../components/fp-nav";
+
+// abstracts
+@use "../abstracts/logo-text";
+@use "../../../Shared/css/template/base/abstracts/icons";
+@use "../abstracts/social-icons";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+@use "../../../Shared/css/template/base/media/load-item";
+
+@mixin critical {
+    @include load-item.new($use-arp: false);
+    @include skip-link.new;
+    @include button.base;
+    @include burst.base;
+    @include icons.new;
+    @include icons.combobox;
+
+    @include document.base;
+    @include logo-text.base;
+    @include header.base;
+    @include nav.base;
+    @include content.base;
+    @include footer.base;
+    @include social-icons.base;
+
+    @include fp-nav.base;
+
+    .responsive-img {
+        margin: 0 auto;
+    }
+
+    @media all and (max-width: 640px) {
+        @include footer.links-to-columns;
+    }
+}
+
+@mixin defer {
+}

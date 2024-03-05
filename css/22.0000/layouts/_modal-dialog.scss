@@ -1,0 +1,13 @@
+$select: ".modal-dialog" !default;
+
+@use "Shared/scss/templates/base/layouts/modal-dialog";
+
+@mixin base {
+    @include modal-dialog.base;
+
+    #{$select} {
+        z-index: 16;
+
+        @content;
+    }
+}

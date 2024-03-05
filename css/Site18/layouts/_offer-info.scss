@@ -1,0 +1,148 @@
+$select: ".offer" !default;
+
+@mixin base {
+    #{$select} {
+        &__section {
+            background: url("/images/offer-bg.jpg");
+            background-size: cover;
+            font-family: Termina;
+
+            #hero-order-btn {
+                border: none;
+            }
+        }
+
+        &__title {
+            color: #859fb8;
+            letter-spacing: 10px;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        &--gifts {
+            display: flex;
+            justify-content: space-evenly;
+            position: relative;
+            font-family: Termina;
+
+            &__organizer {
+                align-self: flex-end;
+                z-index: 2;
+
+                figcaption {
+                    margin: 0;
+                }
+            }
+
+            &__organizer--standalone {
+                font-size: 1.5em;
+                color: #859fb8;
+            }
+
+            &__available {
+                position: absolute;
+                left: 12em;
+
+                p:first-child {
+                    font-weight: normal;
+                }
+
+                p {
+                    font-size: 1.25em;
+                    line-height: 1;
+
+                    img {
+                        display: inline-block;
+                        position: relative;
+                        bottom: -0.5rem;
+                        margin-right: 1rem;
+                    }
+                }
+            }
+
+            &__value {
+                position: absolute;
+                bottom: 11em;
+                left: 15.5em;
+                background-color: #859fb8;
+                padding: 1.25rem;
+                border-radius: 100%;
+
+                p {
+                    font-size: 1.25rem;
+                    color: white;
+                }
+            }
+        }
+
+        &--details {
+            max-width: 18em;
+            font-family: Termina;
+
+            &__text {
+                margin: 2em 0;
+
+                p {
+                    font-weight: normal;
+                }
+            }
+
+            &__shipping {
+                font-size: 2.5em;
+                color: #a190cb;
+                line-height: 1;
+            }
+
+            &__standfirst {
+                font-size: 2.5em;
+                color: #a190cb;
+            }
+
+            &__details {
+                font-size: 2em;
+                color: #a190cb;
+                line-height: 1;
+                font-weight: normal;
+            }
+        }
+
+        &__price {
+            font-family: Termina;
+        }
+
+        & .hero__offer {
+            max-width: 25em;
+        }
+
+        & .offer .hero__group {
+            width: 50%;
+            margin-left: auto;
+            padding: 2em;
+
+            .hero__standfirst {
+                text-align: center;
+                font-size: 1.5em;
+            }
+
+            p {
+                line-height: 2;
+                color: white;
+            }
+
+            .hero__item > * {
+                margin: 1rem 0;
+            }
+        }
+
+        .hero__subtitle {
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .hero__offer-group {
+            color: #a190cb;
+            padding-top: 1rem;
+        }
+        @content;
+    }
+}

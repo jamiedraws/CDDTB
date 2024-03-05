@@ -1,0 +1,214 @@
+@use "sass:math";
+
+@use "../../shared/css/template/dtm/utils/scope";
+@use "../../shared/css/template/dtm/utils/arp";
+@use "../../shared/css/template/dtm/utils/tailspin";
+
+@use "../templates/dtm";
+
+@use "../components/card";
+
+@use "../models/colors";
+@use "../models/queries";
+
+$select: ".form" !default;
+
+@mixin template {
+    @include dtm.ui;
+    @include dtm.form;
+    @include dtm.eflex-checkmark;
+
+    @include scope.for-template(".dtm__in", ".dtm") {
+        @include dtm.review-table;
+        @include dtm.express-checkout;
+    }
+}
+
+@mixin ui {
+    @include arp.apply(
+        "[data-src-img='/shared/images/PositiveSSL_tl_trans.png']",
+        math.div(1, 1),
+        108px
+    ) {
+        margin: auto;
+    }
+
+    #{$select} {
+        $gap: 2rem;
+
+        @media all and (max-width: queries.get(small)) {
+            overflow: hidden;
+        }
+
+        &__in {
+            padding: 4rem 2rem;
+
+            @media all and (max-width: queries.get(mini)) {
+                padding: 4rem 0;
+            }
+        }
+
+        &__section {
+            flex: 1 1 24em;
+            margin: #{$gap};
+        }
+
+        &__row {
+            flex: 1 1 100%;
+            margin: 0 #{$gap} #{$gap};
+        }
+
+        &__group {
+            margin: 0 -#{$gap};
+
+            @media all and (min-width: queries.get(small)) {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            &--item {
+                $gap: 0.5rem;
+
+                margin: -#{$gap};
+                align-items: center;
+
+                > #{$select} {
+                    &__item {
+                        flex: 1 1 150px;
+                        margin: #{$gap};
+                    }
+                }
+            }
+        }
+
+        &__border {
+            border: 1px solid;
+        }
+
+        &__fieldset {
+            padding: 1rem;
+            list-style: none;
+            margin: 0;
+
+            > hr:first-child {
+                margin-top: 0;
+            }
+        }
+
+        &__field {
+            label {
+                font-weight: bold;
+            }
+
+            abbr {
+                color: colors.get(second);
+            }
+
+            &:not(:first-child) {
+                margin-top: 1rem;
+            }
+        }
+
+        &__checkbox {
+            padding: 1rem;
+
+            > svg {
+                margin: 0;
+            }
+
+            > span {
+                margin: 1rem;
+            }
+        }
+
+        &__submit {
+            text-align: center;
+            padding: 0;
+        }
+    }
+}
+
+@mixin defer {
+    // #{$select} {
+    //     @include arp.pseudo;
+    // }
+
+    // @include arp.defer(
+    //     (
+    //         select: "#{$select}"
+    //     )
+    // ) {
+    //     bottom: auto;
+    // }
+}
+
+@mixin card {
+    @include card.product(".product-card");
+}
+
+label[for*="Terms"],
+label[for*="EmailOptIn"] {
+    background: #e4e4e4;
+    border: 1px solid black;
+    font-weight: bold;
+    margin: 1em auto;
+    width: 100%;
+}
+
+// set this a lighter color since it is not required
+label[for*="EmailOptIn"] {
+    background: #fff;
+}
+
+label[for*="Terms"]:hover,
+label[for*="EmailOptIn"]:hover {
+    background: #ccc;
+}
+
+// adjust font size of form to make sure "description in data form review table doesn't overlap product name
+.reviewTable {
+    font-size: 1.2em;
+}
+
+// setting the zip code box a minimum size
+#zc {
+    min-width: 16rem;
+}
+
+/* force fix for payment form labels */
+.dtm--bt #paymentForm .c-brand--form__item:not(:first-of-type),
+.dtm--bt
+    #paymentForm
+    .c-brand--form__item:not(:first-of-type)
+    [class*="c-brand"],
+.dtm--bt #dtm_paymentForm .fldCt,
+.dtm--bt #dtm_paymentForm .fldCt [class*="c-brand"] {
+    line-height: 2rem !important;
+}
+
+/* forcning fix for spacing of payment method fieldset */
+#paymentForm li {
+    margin-bottom: -1em;
+}
+
+#CardNumberCt {
+    margin-top: 1.9em;
+}
+
+#paymentForm {
+    padding-bottom: 1.5em;
+}
+
+[class*="c-brand--table"] th,
+.table th,
+.c-brand--table__th,
+.dtm .c-brand--table--cart--oswe th,
+.orderItemsTable th {
+    background: colors.get(second);
+}
+
+.dtm__in--mv .c-brand--table tbody td:first-of-type,
+.dtm__in--mv .c-brand--table--cart--oswe .c-brand--table__th {
+    font-size: 0.9em;
+}

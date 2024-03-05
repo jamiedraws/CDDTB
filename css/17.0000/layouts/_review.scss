@@ -1,0 +1,120 @@
+@use "sass:math";
+
+$select: ".review" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+// abstracts
+@use "../../../Shared/css/template/base/abstracts/copy";
+@use "../../../Shared/css/template/base/abstracts/position";
+
+// themes
+@use "../../../Shared/css/template/base/themes/background";
+
+// media
+@use "../../../Shared/css/template/base/media/contain";
+
+@mixin base {
+    #{$select} {
+        overflow: hidden;
+
+        @include background.color-map(
+            colors.get(shade),
+            colors.get(base-light)
+        );
+
+        &__title {
+            font: 800 fonts.em(36) / 1 fonts.get(bold);
+            text-transform: uppercase;
+            color: colors.get(primary);
+            margin: 0.5em 0;
+        }
+
+        &__in {
+            display: flex;
+            align-items: center;
+
+            position: relative;
+            z-index: 1;
+
+            max-width: fonts.em(1200);
+            padding: 2em;
+        }
+
+        &__content {
+            flex: 0 1 35em;
+            text-align: center;
+        }
+
+        &__quote {
+            @include copy.separate;
+            margin: 1em 0;
+        }
+
+        &__stars {
+            max-width: 10em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        nav {
+            color: colors.get(primary);
+        }
+
+        &__background {
+            @include contain.format;
+            @include contain.ratio(math.div(322, 160));
+        }
+
+        &--is-ready &__background {
+            background: url(/images/testimonial-bg.jpg) no-repeat right top;
+            background-size: contain;
+        }
+
+        &__background-filter {
+            $fade-color: colors.get(shade);
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                z-index: 2;
+
+                background: #{$fade-color};
+                box-shadow: 0 0 4em 6em #{$fade-color};
+                height: 100%;
+                width: 1em;
+            }
+
+            &::before {
+                left: 0;
+            }
+        }
+
+        @media all and (min-width: queries.set(1100)) {
+            font-size: 1.04vw;
+
+            &__background {
+                @include position.center-absolute;
+            }
+        }
+
+        @media all and (max-width: queries.set(1099)) {
+            &__in {
+                justify-content: center;
+            }
+
+            &__background-filter {
+                position: relative;
+                overflow: hidden;
+            }
+        }
+
+        @content;
+    }
+}

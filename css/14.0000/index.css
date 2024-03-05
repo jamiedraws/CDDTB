@@ -1,0 +1,226 @@
+.before-after-single::before {
+  padding-bottom: calc(100% / (1.3064133017));
+}
+
+.before-after-single {
+  max-width: 550px;
+  flex-basis: 550px;
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  min-height: 1px;
+  min-width: 1px;
+  overflow: hidden;
+}
+.before-after-single::before, .before-after-single::after {
+  content: "";
+}
+.before-after-single::before {
+  display: block;
+}
+.before-after-single::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  z-index: -1;
+}
+.before-after-single > img, .before-after-single > iframe, .before-after-single > noscript, .before-after-single > svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.media__img::before {
+  padding-bottom: calc(100% / (1.9483394834));
+}
+
+.media__img {
+  max-width: 528px;
+  flex-basis: 528px;
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  min-height: 1px;
+  min-width: 1px;
+  overflow: hidden;
+}
+.media__img::before, .media__img::after {
+  content: "";
+}
+.media__img::before {
+  display: block;
+}
+.media__img::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  z-index: -1;
+}
+.media__img > img, .media__img > iframe, .media__img > noscript, .media__img > svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.great-img::before {
+  padding-bottom: calc(100% / (1.3294117647));
+}
+
+.great-img {
+  max-width: 339px;
+  flex-basis: 339px;
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  min-height: 1px;
+  min-width: 1px;
+  overflow: hidden;
+}
+.great-img::before, .great-img::after {
+  content: "";
+}
+.great-img::before {
+  display: block;
+}
+.great-img::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  z-index: -1;
+}
+.great-img > img, .great-img > iframe, .great-img > noscript, .great-img > svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.mbg::before {
+  padding-bottom: calc(100% / (1));
+}
+
+.mbg {
+  max-width: 132px;
+  flex-basis: 132px;
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  min-height: 1px;
+  min-width: 1px;
+  overflow: hidden;
+}
+.mbg::before, .mbg::after {
+  content: "";
+}
+.mbg::before {
+  display: block;
+}
+.mbg::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  z-index: -1;
+}
+.mbg > img, .mbg > iframe, .mbg > noscript, .mbg > svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.hero {
+  padding: 0;
+}
+
+.hero__video {
+  flex: 0 1 520px;
+}
+
+.hero__title,
+.hero__subtitle {
+  text-align: left;
+}
+
+.group--great {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  font: bold italic 2.5rem/1 gotham, sans-serif;
+}
+.group--great > * {
+  flex: 1 1 287px;
+  margin: 0;
+}
+.group--great picture,
+.group--great img {
+  margin: 0 auto;
+}
+.group--great figcaption {
+  margin: 1em 0;
+}
+
+.stat em {
+  font-style: italic;
+}
+
+@media all and (max-width: 900px) {
+  .media__player {
+    margin-top: 0;
+  }
+
+  .media__group .media__item {
+    margin: 1rem;
+  }
+  .media__group .media__item:first-of-type {
+    margin: 0;
+  }
+}
+@media all and (max-width: 600px) {
+  .dtm__in .hero__offer .button {
+    font-size: 1.3rem;
+  }
+}
+.hero__shipping {
+  font-size: 3.5em;
+}
+.hero__shipping > span {
+  font-size: 0.4em;
+}
+
+.popup__group {
+  display: block;
+}
+@supports (display: flex) {
+  .popup__group {
+    display: flex;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

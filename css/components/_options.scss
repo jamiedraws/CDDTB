@@ -1,0 +1,269 @@
+@use "sass:math";
+@use "../../Shared/css/template/dtm/utils/arp";
+@use "../../Shared/css/template/dtm/utils/text";
+@use "../models/queries";
+@use "../models/colors";
+
+$select: ".option" !default;
+
+.offer-title {
+    position: relative;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 2.4rem;
+    margin: 0.5em 0;
+    padding: 0.25em 0;
+    text-align: center;
+    background: linear-gradient(to bottom, #efe8b7, #e2cd6c);
+}
+
+.offer-title::before,
+.offer-title::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background: white;
+}
+
+.offer-title::before {
+    left: 0;
+    background: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 1)
+    );
+}
+
+.offer-title::after {
+    right: 0;
+    background: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0)
+    );
+}
+
+@media all and (max-width: queries.get(mobile)) {
+    .offer-title {
+        font-size: 1.5rem;
+    }
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+@mixin ui {
+    #{$select} {
+        margin: 1rem 0;
+        border: 1px solid #cbcbcb;
+        padding: 0.5em;
+        font-size: 1.5rem;
+        color: #343535;
+        flex-basis: 100%;
+
+        @include arp.apply("#{$select}__img", math.div(436, 318), 436px) {
+            margin: 0 auto;
+        }
+
+        @media all and (min-width: queries.get(desktop)) {
+            flex-basis: calc(50% - 1rem);
+        }
+
+        #{$select} + #{$select}::before {
+            content: "OR";
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            top: 13%;
+            color: white;
+            border-radius: 100%;
+            background: #26839b;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            width: 2.5em;
+            height: 2.5em;
+        }
+
+        > * {
+            flex: 0 1 100%;
+        }
+
+        #{$select}__text {
+            background: #f0f0f0;
+            text-align: center;
+            padding: 1em;
+        }
+
+        #{$select}__title {
+            font-size: 2em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #{$select}__tagline {
+            font-size: 1.33em;
+            font-style: italic;
+        }
+
+        #{$select}__gifts,
+        #{$select}__link {
+            color: #258a9e;
+        }
+
+        #{$select}__gifts {
+            text-transform: uppercase;
+            font-size: 1.33em;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        #{$select}__link {
+            display: block;
+            margin: 0.5em 0 0;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        #{$select}__offer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 7em;
+        }
+
+        #{$select}__offer .offer__price {
+            font-weight: bold;
+            font-size: 3em;
+            margin: 0 0.25em;
+        }
+
+        #{$select}__offer .offer__price--crossout {
+            font-size: 1.25em;
+            margin: 0.75em 1em 0;
+        }
+
+        #{$select}__offer .offer__price,
+        #{$select}__offer .offer__amt {
+            letter-spacing: -0.07em;
+        }
+
+        #{$select}__offer .badge {
+            font-size: 1.66em;
+        }
+
+        #{$select}__includes {
+            font-weight: bold;
+            margin: 1em auto;
+            max-width: 32em;
+            min-height: 14em;
+            > strong {
+                text-transform: uppercase;
+                font-size: 1.6em;
+            }
+            li {
+                list-style: none;
+                position: relative;
+                em {
+                    font-weight: 500;
+                    font-style: italic;
+                }
+                &::before {
+                    position: absolute;
+                    content: "";
+                    width: 0.5em;
+                    height: 0.5em;
+                    left: -1em;
+                    top: 0.75em;
+                    background: #248b9f;
+                    border-radius: 100%;
+                }
+            }
+        }
+
+        #{$select}__header {
+            background: #343535;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        #{$select} .shades__group {
+            align-items: flex-start;
+            text-align: center;
+        }
+
+        .shade {
+            text-align: center;
+            &__img {
+                &:hover img,
+                &:focus img {
+                    outline: 2px solid white;
+                    outline-offset: -4px;
+                }
+                &.is-selected img {
+                    outline: 4px solid #258a9e;
+                    outline-offset: -4px;
+                }
+            }
+            .caption {
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+        }
+    }
+
+    @include arp.apply(
+        "#{$select}--single #{$select}__img",
+        math.div(140, 318),
+        140px
+    ) {
+        margin: 0 auto;
+    }
+
+    #{$select} {
+        @media all and (max-width: queries.get(mobile)) {
+            font-size: 1rem;
+            #{$select}__text {
+                font-size: 1.1em;
+            }
+            #{$select} .shade {
+                margin: 0.33em;
+            }
+        }
+    }
+}
+
+.or {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    font-size: 2.4em;
+    padding: 0.3em;
+    width: 2.6em;
+    background: colors.get(second);
+    height: 2.6em;
+    color: white;
+    margin: auto;
+    @media all and (min-width: queries.get(nav)) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: 13%;
+    }
+}

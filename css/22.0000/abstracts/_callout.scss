@@ -1,0 +1,21 @@
+$select: ".callout" !default;
+
+// config
+@use "../config/fonts";
+@use "../config/colors";
+@use "../config/queries";
+
+@mixin base {
+    #{$select} {
+        text-align: center;
+        letter-spacing: 10px;
+        color: colors.get(accent);
+        font: 800 1.5em fonts.get(bold);
+
+        @media only screen and (max-width: queries.set(785)) {
+            font-size: 1em;
+        }
+
+        @content;
+    }
+}

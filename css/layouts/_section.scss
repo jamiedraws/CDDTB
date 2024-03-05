@@ -1,0 +1,13 @@
+@use "../models/queries";
+
+$select: ".section" !default;
+
+@mixin ui {
+	#{$select} {
+		margin: 0;
+
+		&__in {
+			padding: 4rem 2rem;
+		}
+	}
+}

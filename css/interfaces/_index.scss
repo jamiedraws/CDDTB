@@ -1,0 +1,84 @@
+@use "../../Shared/css/klarna/placement" as klarna;
+
+@use "../interfaces/page";
+@use "../interfaces/landing-page";
+
+@use "../components/hero";
+@use "../components/media";
+@use "../components/results";
+@use "../components/stats";
+@use "../components/durable";
+@use "../components/product";
+@use "../components/slide";
+@use "../components/review";
+@use "../components/bas";
+@use "../components/includes";
+@use "../components/popup";
+@use "../components/more-info";
+
+@use "../media/defer";
+@use "../media/images";
+@use "../media/iframes";
+
+@use "../models/queries";
+
+@use "../../Shared/css/template/dtm/components/fp-nav";
+
+@include fp-nav.new;
+
+.fp-nav {
+    color: white;
+}
+
+.fp-nav a {
+    text-decoration: none;
+}
+
+.fp-nav__a {
+    background: #303135;
+}
+
+.fp-nav__a--order {
+    background: #258a9e;
+}
+
+.fp-nav__a:focus,
+.fp-nav__a:hover {
+    background: #e3ce72;
+}
+
+@media all and (min-width: queries.get(nav)) {
+    .fp-nav {
+        display: none;
+    }
+}
+
+@mixin ui {
+    @include defer.images;
+    @include defer.iframes;
+
+    @include images.index;
+
+    @include landing-page.ui;
+
+    @include hero.ui {
+        //@include klarna.ui;
+    }
+
+    @include includes.ui {
+        @include includes.payment;
+    }
+    @include media.ui;
+    @include results.ui;
+    @include stats.ui;
+    @include durable.ui;
+    @include more-info.ui;
+    @include product.ui;
+    @include product.figure;
+    @include product.list;
+    @include popup.ui;
+
+    @include slide.ui;
+    @include review.ui;
+    @include bas.ui;
+}
